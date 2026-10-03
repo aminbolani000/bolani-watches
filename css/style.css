@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     background-color: var(--bg-warm-beige);
-    aspect-ratio: 1920 / 800; /* Responsive aspect ratio for 1920x800 */
+    aspect-ratio: 1920 / 500; /* Responsive aspect ratio for 1920x800 */
 }
 
 .banner-slider {
