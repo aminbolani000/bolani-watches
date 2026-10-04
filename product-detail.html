@@ -1,196 +1,1742 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - Bolani Watches</title>
-    
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Product Details - Bolani Watches
+    </title>
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        @import url(
+            'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap'
+        );
+
+
+        /* =====================================================
+           GLOBAL RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
 
         body {
-            background-color: #f6f5f2; /* Warm Beige Background */
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f6f5f2;
+
+            font-family:
+                'Plus Jakarta Sans',
+                sans-serif;
+
             color: #3e4656;
+
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
         }
+
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        img {
+            display: block;
+        }
+
 
         .font-heading {
             font-family: 'Cinzel', serif;
         }
 
-        /* Custom Scrollbar for Thumbnails */
-        .no-scrollbar::-webkit-scrollbar {
+
+        /* =====================================================
+           COMMON
+        ====================================================== */
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        .text-center {
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .top-header {
+            width: 100%;
+
+            background: rgba(
+                246,
+                245,
+                242,
+                0.90
+            );
+
+            border-bottom:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.20
+                );
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+
+            backdrop-filter: blur(16px);
+
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+
+        .header-container {
+            width: 100%;
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding:
+                12px 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .logo-link {
+            text-decoration: none;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .logo-main {
+            font-family: 'Cinzel', serif;
+
+            font-size: 20px;
+
+            line-height: 1.2;
+
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            color: #1d2b3a;
+
+            transition: color 0.3s ease;
+        }
+
+
+        .logo-link:hover .logo-main {
+            color: #8c7a5b;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ====================================================== */
+
+        .back-button {
+            border: none;
+
+            background: transparent;
+
+            color: #1d2b3a;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            transition:
+                color 0.3s ease;
+        }
+
+
+        .back-button:hover {
+            color: #8c7a5b;
+
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main-container {
+            width: 100%;
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding:
+                24px 12px;
+
+            flex: 1;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading-state {
+            text-align: center;
+
+            padding:
+                80px 20px;
+        }
+
+
+        .loading-state i {
+            font-size: 36px;
+
+            color: #1d2b3a;
+        }
+
+
+        .loading-state p {
+            margin-top: 12px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #6b7280;
+        }
+
+
+        /* =====================================================
+           PRODUCT CONTAINER
+        ====================================================== */
+
+        .product-container {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 40px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           COMMON WHITE CARD
+        ====================================================== */
+
+        .product-card-box {
+            background: #ffffff;
+
+            padding: 20px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.25
+                );
+
+            box-shadow:
+                0 2px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.05
+                );
+        }
+
+
+        /* =====================================================
+           MAIN IMAGE
+        ====================================================== */
+
+        .main-image-wrapper {
+            position: relative;
+
+            width: 100%;
+
+            height: 384px;
+
+            background: #f6f5f2;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 8px;
+        }
+
+
+        .main-product-image {
+            max-width: 100%;
+
+            max-height: 100%;
+
+            width: auto;
+
+            height: auto;
+
+            object-fit: contain;
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+        }
+
+
+        /* =====================================================
+           IMAGE NAVIGATION BUTTONS
+        ====================================================== */
+
+        .image-nav-button {
+            position: absolute;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 32px;
+
+            height: 32px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.80
+                );
+
+            color: #1d2b3a;
+
+            box-shadow:
+                0 3px 10px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.12
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+
+        .image-nav-button:hover {
+            background: #ffffff;
+
+            transform:
+                translateY(-50%)
+                scale(1.05);
+        }
+
+
+        .prev-button {
+            left: 8px;
+        }
+
+
+        .next-button {
+            right: 8px;
+        }
+
+
+        .image-nav-button i {
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           IMAGE COUNTER
+        ====================================================== */
+
+        .image-counter {
+            position: absolute;
+
+            bottom: 8px;
+
+            right: 8px;
+
+            background:
+                rgba(
+                    29,
+                    43,
+                    58,
+                    0.80
+                );
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            padding:
+                3px 8px;
+
+            border-radius: 6px;
+        }
+
+
+        /* =====================================================
+           THUMBNAILS
+        ====================================================== */
+
+        .thumbnail-strip {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+            overflow-x: auto;
+
+            padding-bottom: 4px;
+
+            scrollbar-width: none;
+
+            -ms-overflow-style: none;
+        }
+
+
+        .thumbnail-strip::-webkit-scrollbar {
             display: none;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BAR: Navigation -->
-    <header class="w-full bg-[#f6f5f2] border-b border-[#999a90]/20 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
-            <!-- Text Logo -->
-            <a href="index.html" class="group flex flex-col">
-                <span class="font-heading text-xl sm:text-2xl font-bold tracking-wider text-[#1d2b3a]">
+
+        .thumb-button {
+            width: 56px;
+
+            height: 56px;
+
+            flex-shrink: 0;
+
+            border-radius: 8px;
+
+            background: #f6f5f2;
+
+            border:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.30
+                );
+
+            padding: 4px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .thumb-button.active {
+            border-color: #1d2b3a;
+
+            box-shadow:
+                0 0 0 2px
+                #1d2b3a;
+        }
+
+
+        .thumb-button img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           DESCRIPTION
+        ====================================================== */
+
+        .description-box {
+            margin-top: 16px;
+
+            padding-top: 16px;
+
+            border-top:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.20
+                );
+        }
+
+
+        .description-title {
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #1d2b3a;
+        }
+
+
+        .description-text {
+            margin-top: 4px;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            color: #6b7280;
+        }
+
+
+        /* =====================================================
+           PRODUCT INFO
+        ====================================================== */
+
+        .product-info-box {
+            background: #ffffff;
+
+            padding: 24px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.25
+                );
+
+            box-shadow:
+                0 2px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.05
+                );
+        }
+
+
+        /* =====================================================
+           PRODUCT HEADER
+        ====================================================== */
+
+        .product-header {
+            border-bottom:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.20
+                );
+
+            padding-bottom: 16px;
+        }
+
+
+        .stock-badge {
+            display: inline-block;
+
+            background: #8c7a5b;
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            padding:
+                3px 8px;
+
+            border-radius: 999px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.08em;
+        }
+
+
+        .product-title {
+            font-family: 'Cinzel', serif;
+
+            font-size: 24px;
+
+            line-height: 1.3;
+
+            font-weight: 700;
+
+            color: #1d2b3a;
+
+            margin-top: 8px;
+        }
+
+
+        .price-row {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 8px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .product-price {
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: #1d2b3a;
+        }
+
+
+        .discount-tag {
+            background: #dcfce7;
+
+            color: #15803d;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            padding:
+                5px 8px;
+
+            border-radius: 6px;
+        }
+
+
+        /* =====================================================
+           ORDER FORM
+        ====================================================== */
+
+        .order-form {
+            margin-top: 16px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+        }
+
+
+        .form-heading {
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #1d2b3a;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .form-heading i {
+            color: #8c7a5b;
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           FORM GROUP
+        ====================================================== */
+
+        .form-group {
+            width: 100%;
+        }
+
+
+        .form-label {
+            display: block;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #3e4656;
+
+            margin-bottom: 4px;
+        }
+
+
+        .form-input,
+        .form-select {
+            width: 100%;
+
+            background: #f6f5f2;
+
+            border:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.30
+                );
+
+            border-radius: 10px;
+
+            padding:
+                9px 12px;
+
+            font-size: 13px;
+
+            color: #1d2b3a;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: #1d2b3a;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    29,
+                    43,
+                    58,
+                    0.12
+                );
+        }
+
+
+        /* =====================================================
+           QUANTITY BOX
+        ====================================================== */
+
+        .quantity-box {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+
+            align-items: center;
+
+            background: #f6f5f2;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.20
+                );
+        }
+
+
+        .quantity-label {
+            display: block;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #3e4656;
+
+            margin-bottom: 4px;
+        }
+
+
+        .quantity-controls {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .quantity-button {
+            width: 32px;
+
+            height: 32px;
+
+            border:
+                1px solid
+                rgba(
+                    153,
+                    154,
+                    144,
+                    0.30
+                );
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #1d2b3a;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease;
+        }
+
+
+        .quantity-button:hover {
+            background: #1d2b3a;
+
+            color: #ffffff;
+        }
+
+
+        .quantity-display {
+            width: 24px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #1d2b3a;
+        }
+
+
+        /* =====================================================
+           TOTAL PRICE
+        ====================================================== */
+
+        .total-box {
+            text-align: right;
+        }
+
+
+        .total-label {
+            display: block;
+
+            font-size: 10px;
+
+            color: #6b7280;
+
+            font-weight: 600;
+        }
+
+
+        .total-price {
+            font-size: 20px;
+
+            font-weight: 800;
+
+            color: #1d2b3a;
+
+            display: block;
+
+            margin-top: 2px;
+        }
+
+
+        .discount-text {
+            display: block;
+
+            font-size: 9px;
+
+            color: #16a34a;
+
+            font-weight: 700;
+
+            margin-top: 2px;
+        }
+
+
+        /* =====================================================
+           WHATSAPP BUTTON
+        ====================================================== */
+
+        .whatsapp-button {
+            width: 100%;
+
+            border: none;
+
+            background: #25D366;
+
+            color: #ffffff;
+
+            padding:
+                12px 16px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            box-shadow:
+                0 4px 12px
+                rgba(
+                    37,
+                    211,
+                    102,
+                    0.20
+                );
+
+            transition:
+                background 0.3s ease,
+                transform 0.2s ease;
+        }
+
+
+        .whatsapp-button:hover {
+            background: #1ebd59;
+
+            transform: translateY(-1px);
+        }
+
+
+        .whatsapp-button i {
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           SAFE ORDER TEXT
+        ====================================================== */
+
+        .safe-order-text {
+            text-align: center;
+
+            font-size: 10px;
+
+            color: #6b7280;
+
+            margin-top: -4px;
+        }
+
+
+        .safe-order-text i {
+            margin-right: 3px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+            width: 100%;
+
+            background: #3e4656;
+
+            color: #ffffff;
+
+            text-align: center;
+
+            padding: 16px;
+
+            font-size: 12px;
+
+            margin-top: 32px;
+        }
+
+
+        .footer strong {
+            color: #f6f5f2;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .product-container {
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+
+            .main-image-wrapper {
+                height: 384px;
+            }
+
+
+            .product-info-box {
+                padding: 20px;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 640px) {
+
+            .header-container {
+                padding:
+                    14px 16px;
+            }
+
+
+            .logo-main {
+                font-size: 18px;
+            }
+
+
+            .back-button {
+                font-size: 11px;
+            }
+
+
+            .main-container {
+                padding:
+                    20px 12px;
+            }
+
+
+            .product-container {
+                gap: 16px;
+            }
+
+
+            .product-card-box {
+                padding: 12px;
+
+                border-radius: 14px;
+            }
+
+
+            .product-info-box {
+                padding: 16px;
+
+                border-radius: 14px;
+            }
+
+
+            .main-image-wrapper {
+                height: 288px;
+
+                border-radius: 10px;
+            }
+
+
+            .product-title {
+                font-size: 20px;
+            }
+
+
+            .product-price {
+                font-size: 24px;
+            }
+
+
+            .description-title {
+                font-size: 13px;
+            }
+
+
+            .description-text {
+                font-size: 11px;
+            }
+
+
+            .quantity-box {
+                gap: 8px;
+
+                padding: 10px;
+            }
+
+
+            .whatsapp-button {
+                font-size: 13px;
+
+                padding:
+                    11px 12px;
+            }
+
+
+            .footer {
+                margin-top: 20px;
+
+                padding: 14px;
+
+                font-size: 11px;
+            }
+
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 380px) {
+
+            .logo-main {
+                font-size: 16px;
+            }
+
+
+            .back-button {
+                font-size: 10px;
+            }
+
+
+            .main-image-wrapper {
+                height: 250px;
+            }
+
+
+            .product-title {
+                font-size: 18px;
+            }
+
+
+            .product-price {
+                font-size: 22px;
+            }
+
+
+            .quantity-box {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .total-box {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <header class="top-header">
+
+        <div class="header-container">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo-link"
+            >
+
+                <span class="logo-main">
                     BOLANI WATCHES
                 </span>
+
             </a>
 
-            <!-- Back Button -->
-            <button onclick="history.back()" class="text-xs sm:text-sm font-semibold text-[#1d2b3a] hover:underline flex items-center gap-1">
-                <i class="fa-solid fa-arrow-left"></i> Go Back
+
+            <!-- BACK -->
+
+            <button
+                onclick="history.back()"
+                class="back-button"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Go Back
+
             </button>
+
         </div>
+
     </header>
 
-    <!-- MAIN PRODUCT DETAIL & ORDER SECTION -->
-    <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 w-full flex-1">
-        
-        <!-- Loading State -->
-        <div id="loadingState" class="text-center py-20">
-            <i class="fa-solid fa-circle-notch fa-spin text-4xl text-[#1d2b3a]"></i>
-            <p class="mt-3 text-sm font-semibold text-[#6b7280]">Loading Product Details...</p>
+
+
+    <!-- =====================================================
+         MAIN PRODUCT SECTION
+    ====================================================== -->
+
+    <main class="main-container">
+
+
+        <!-- =================================================
+             LOADING
+        ================================================== -->
+
+        <div
+            id="loadingState"
+            class="loading-state"
+        >
+
+            <i
+                class="fa-solid fa-circle-notch fa-spin"
+            ></i>
+
+            <p>
+                Loading Product Details...
+            </p>
+
         </div>
 
-        <!-- Main Grid Container (Desktop: 2 Columns | Mobile: Stacked) -->
-        <div id="productContainer" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
-            
-            <!-- LEFT COLUMN: Image Gallery Carousel -->
-            <div class="bg-white p-3 sm:p-5 rounded-2xl border border-[#999a90]/25 shadow-sm">
-                
-                <!-- Main Image View (Amazon Style Slider) -->
-                <div class="relative w-full h-72 sm:h-96 bg-[#f6f5f2] rounded-xl overflow-hidden flex items-center justify-center p-2">
-                    <img id="mainImage" src="" alt="Product Image" class="max-h-full max-w-full object-contain transition-all duration-300">
-                    
-                    <!-- Prev / Next Navigation Arrows -->
-                    <button id="prevBtn" onclick="prevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1d2b3a] w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all">
-                        <i class="fa-solid fa-chevron-left text-xs"></i>
-                    </button>
-                    <button id="nextBtn" onclick="nextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1d2b3a] w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all">
-                        <i class="fa-solid fa-chevron-right text-xs"></i>
+
+
+        <!-- =================================================
+             PRODUCT CONTAINER
+        ================================================== -->
+
+        <div
+            id="productContainer"
+            class="product-container hidden"
+        >
+
+
+            <!-- =================================================
+                 LEFT COLUMN
+            ================================================== -->
+
+            <div class="product-card-box">
+
+
+                <!-- MAIN IMAGE -->
+
+                <div class="main-image-wrapper">
+
+
+                    <img
+                        id="mainImage"
+                        src=""
+                        alt="Product Image"
+                        class="main-product-image"
+                    >
+
+
+                    <!-- PREVIOUS -->
+
+                    <button
+                        id="prevBtn"
+                        onclick="prevImage()"
+                        class="image-nav-button prev-button"
+                        type="button"
+                    >
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
                     </button>
 
-                    <!-- Image Index Badge -->
-                    <span id="imageCounter" class="absolute bottom-2 right-2 bg-[#1d2b3a]/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">
+
+                    <!-- NEXT -->
+
+                    <button
+                        id="nextBtn"
+                        onclick="nextImage()"
+                        class="image-nav-button next-button"
+                        type="button"
+                    >
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+
+                    <!-- COUNTER -->
+
+                    <span
+                        id="imageCounter"
+                        class="image-counter"
+                    >
                         1 / 1
                     </span>
+
                 </div>
 
-                <!-- Thumbnails Strip (Clickable) -->
-                <div id="thumbnailStrip" class="flex gap-2 mt-3 overflow-x-auto no-scrollbar pb-1">
-                    <!-- Thumbnails will be populated dynamically -->
+
+
+                <!-- THUMBNAILS -->
+
+                <div
+                    id="thumbnailStrip"
+                    class="thumbnail-strip"
+                >
+
+                    <!-- Dynamically generated -->
+
                 </div>
 
-                <!-- Short Product Description (Mobile View Optimized) -->
-                <div class="mt-4 pt-4 border-t border-[#999a90]/20">
-                    <h3 class="font-bold text-[#1d2b3a] text-sm sm:text-base">Description:</h3>
-                    <p id="productDescription" class="text-xs sm:text-sm text-[#6b7280] mt-1 leading-relaxed">
-                        <!-- Description populated dynamically -->
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="description-box">
+
+                    <h3 class="description-title">
+                        Description:
+                    </h3>
+
+                    <p
+                        id="productDescription"
+                        class="description-text"
+                    >
+                        <!-- Dynamic -->
+
                     </p>
+
                 </div>
+
             </div>
 
-            <!-- RIGHT COLUMN: Product Info & Order Form -->
-            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-[#999a90]/25 shadow-sm">
-                
-                <!-- Product Title & Price -->
-                <div class="border-b border-[#999a90]/20 pb-4">
-                    <span id="productBadge" class="bg-[#8c7a5b] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+
+
+            <!-- =================================================
+                 RIGHT COLUMN
+            ================================================== -->
+
+            <div class="product-info-box">
+
+
+                <!-- PRODUCT HEADER -->
+
+                <div class="product-header">
+
+
+                    <span
+                        id="productBadge"
+                        class="stock-badge"
+                    >
                         In Stock
                     </span>
-                    <h1 id="productTitle" class="font-heading text-xl sm:text-2xl font-bold text-[#1d2b3a] mt-2">
-                        <!-- Title -->
+
+
+                    <h1
+                        id="productTitle"
+                        class="product-title"
+                    >
+                        <!-- Dynamic -->
                     </h1>
-                    
-                    <div class="flex items-center gap-3 mt-2">
-                        <span id="productPrice" class="text-2xl sm:text-3xl font-extrabold text-[#1d2b3a]">
+
+
+                    <div class="price-row">
+
+
+                        <span
+                            id="productPrice"
+                            class="product-price"
+                        >
                             Rs. 0
                         </span>
-                        <span id="discountTag" class="hidden bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-md">
+
+
+                        <span
+                            id="discountTag"
+                            class="discount-tag hidden"
+                        >
                             Bulk Discount Available!
                         </span>
+
                     </div>
+
                 </div>
 
-                <!-- EASY ORDER FORM -->
-                <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="mt-4 space-y-4">
-                    
-                    <h2 class="font-bold text-[#1d2b3a] text-sm sm:text-base flex items-center gap-2">
-                        <i class="fa-solid fa-[#1d2b3a] fa-cart-shopping text-[#8c7a5b]"></i> Quick Order Form
+
+
+                <!-- =================================================
+                     ORDER FORM
+                ================================================== -->
+
+                <form
+                    id="orderForm"
+                    onsubmit="handleOrderSubmit(event)"
+                    class="order-form"
+                >
+
+
+                    <h2 class="form-heading">
+
+                        <i
+                            class="fa-solid fa-cart-shopping"
+                        ></i>
+
+                        Quick Order Form
+
                     </h2>
 
-                    <!-- 1. Customer Name -->
-                    <div>
-                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Your Full Name *</label>
-                        <input type="text" id="custName" required placeholder="Aapka Naam" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+
+
+                    <!-- CUSTOMER NAME -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="custName"
+                        >
+                            Your Full Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="custName"
+                            required
+                            placeholder="Aapka Naam"
+                            class="form-input"
+                        >
+
                     </div>
 
-                    <!-- 2. Location / Address -->
-                    <div>
-                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Complete Address / City *</label>
-                        <input type="text" id="custAddress" required placeholder="Ghar ka address aur shehar ka naam" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="custAddress"
+                        >
+                            Complete Address / City *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="custAddress"
+                            required
+                            placeholder="Ghar ka address aur shehar ka naam"
+                            class="form-input"
+                        >
+
                     </div>
 
-                    <!-- 3. Phone Number -->
-                    <div>
-                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Phone Number (WhatsApp) *</label>
-                        <input type="tel" id="custPhone" required placeholder="03xx-xxxxxxx" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="custPhone"
+                        >
+                            Phone Number (WhatsApp) *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="custPhone"
+                            required
+                            placeholder="03xx-xxxxxxx"
+                            class="form-input"
+                        >
+
                     </div>
 
-                    <!-- 4. Dynamic Color Option (Only shows if added in Admin Panel) -->
-                    <div id="colorSelectionSection" class="hidden">
-                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Select Color Choice *</label>
-                        <select id="colorSelect" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
-                            <!-- Options added dynamically -->
+
+
+                    <!-- COLOR -->
+
+                    <div
+                        id="colorSelectionSection"
+                        class="form-group hidden"
+                    >
+
+                        <label
+                            class="form-label"
+                            for="colorSelect"
+                        >
+                            Select Color Choice *
+                        </label>
+
+                        <select
+                            id="colorSelect"
+                            class="form-select"
+                        >
+
+                            <!-- Dynamic -->
+
                         </select>
+
                     </div>
 
-                    <!-- 5. Choose Specific Image Variation -->
-                    <div>
-                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Which Image Variant Do You Prefer? *</label>
-                        <select id="imageVariantSelect" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
-                            <!-- Populated dynamically -->
+
+
+                    <!-- IMAGE VARIANT -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="imageVariantSelect"
+                        >
+                            Which Image Variant Do You Prefer? *
+                        </label>
+
+                        <select
+                            id="imageVariantSelect"
+                            class="form-select"
+                        >
+
+                            <!-- Dynamic -->
+
                         </select>
+
                     </div>
 
-                    <!-- 6. Quantity Selector & Discount Calculator -->
-                    <div class="grid grid-cols-2 gap-3 items-center bg-[#f6f5f2] p-3 rounded-xl border border-[#999a90]/20">
+
+
+                    <!-- =================================================
+                         QUANTITY
+                    ================================================== -->
+
+                    <div class="quantity-box">
+
+
+                        <!-- QUANTITY -->
+
                         <div>
-                            <label class="block text-xs font-bold text-[#3e4656] mb-1">Quantity:</label>
-                            <div class="flex items-center gap-2">
-                                <button type="button" onclick="changeQty(-1)" class="w-8 h-8 bg-white border border-[#999a90]/30 rounded-lg font-bold text-[#1d2b3a] hover:bg-[#1d2b3a] hover:text-white transition-colors">-</button>
-                                <span id="qtyDisplay" class="font-bold text-sm text-[#1d2b3a] w-6 text-center">1</span>
-                                <button type="button" onclick="changeQty(1)" class="w-8 h-8 bg-white border border-[#999a90]/30 rounded-lg font-bold text-[#1d2b3a] hover:bg-[#1d2b3a] hover:text-white transition-colors">+</button>
+
+                            <label class="quantity-label">
+                                Quantity:
+                            </label>
+
+
+                            <div class="quantity-controls">
+
+
+                                <button
+                                    type="button"
+                                    onclick="changeQty(-1)"
+                                    class="quantity-button"
+                                >
+                                    -
+                                </button>
+
+
+                                <span
+                                    id="qtyDisplay"
+                                    class="quantity-display"
+                                >
+                                    1
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    onclick="changeQty(1)"
+                                    class="quantity-button"
+                                >
+                                    +
+                                </button>
+
+
                             </div>
+
                         </div>
 
-                        <!-- Total Calculated Price -->
-                        <div class="text-right">
-                            <span class="text-[10px] text-[#6b7280] block font-semibold">Total Payable:</span>
-                            <span id="totalPriceDisplay" class="text-lg font-extrabold text-[#1d2b3a]">Rs. 0</span>
-                            <span id="discountText" class="text-[9px] text-green-600 block font-bold"></span>
+
+
+                        <!-- TOTAL -->
+
+                        <div class="total-box">
+
+                            <span class="total-label">
+                                Total Payable:
+                            </span>
+
+
+                            <span
+                                id="totalPriceDisplay"
+                                class="total-price"
+                            >
+                                Rs. 0
+                            </span>
+
+
+                            <span
+                                id="discountText"
+                                class="discount-text"
+                            ></span>
+
                         </div>
+
                     </div>
 
-                    <!-- ORDER NOW BUTTON (Direct WhatsApp Redirect) -->
-                    <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-colors shadow-md flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Order Now via WhatsApp</span>
+
+
+                    <!-- =================================================
+                         WHATSAPP
+                    ================================================== -->
+
+                    <button
+                        type="submit"
+                        class="whatsapp-button"
+                    >
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        <span>
+                            Order Now via WhatsApp
+                        </span>
+
                     </button>
 
-                    <p class="text-[10px] text-center text-[#6b7280]">
-                        <i class="fa-solid fa-shield-halved"></i> Safe & Fast Cash on Delivery Order
+
+
+                    <!-- SAFE ORDER -->
+
+                    <p class="safe-order-text">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Safe & Fast Cash on Delivery Order
+
                     </p>
+
+
                 </form>
 
             </div>
@@ -199,225 +1745,944 @@
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="w-full bg-[#3e4656] text-white text-center py-4 text-xs sm:text-sm mt-8">
-        <p>Web Created By <span class="font-bold text-[#f6f5f2]">@Amin Bolani</span></p>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <p>
+
+            Web Created By
+
+            <strong>
+                @Amin Bolani
+            </strong>
+
+        </p>
+
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
     <script>
-        // Store phone number for WhatsApp Chat
-        const OWNER_WHATSAPP = "923000000000"; // Replace with your WhatsApp Number
+
+
+        /* =====================================================
+           OWNER WHATSAPP
+        ====================================================== */
+
+        const OWNER_WHATSAPP =
+            "923000000000";
+
 
         let currentProduct = null;
+
         let activeImageIndex = 0;
+
         let selectedQuantity = 1;
 
-        // 1. Fetch Product ID from URL Params & Load Data
+
+
+        /* =====================================================
+           1. LOAD PRODUCT
+        ====================================================== */
+
         async function loadProductDetail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
+
+
+            const urlParams =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const productId =
+                urlParams.get('id');
+
 
             if (!productId) {
-                alert("Product reference missing!");
-                window.location.href = "index.html";
+
+                alert(
+                    "Product reference missing!"
+                );
+
+                window.location.href =
+                    "index.html";
+
                 return;
+
             }
+
 
             try {
-                // Fetch product from backend API
-                const response = await fetch(`https://watches-backend-cyan.vercel.app/api/products/${productId}`);
-                if (!response.ok) throw new Error("API Failed");
-                currentProduct = await response.json();
+
+
+                const response =
+                    await fetch(
+                        `https://watches-backend-cyan.vercel.app/api/products/${productId}`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "API Failed"
+                    );
+
+                }
+
+
+                currentProduct =
+                    await response.json();
+
+
             } catch (error) {
-                console.log("Loading fallback mock product data:", error);
-                
-                // Fallback Mock Data for testing
+
+
+                console.log(
+                    "Loading fallback mock product data:",
+                    error
+                );
+
+
+                /* =============================================
+                   FALLBACK DATA
+                ============================================== */
+
                 currentProduct = {
+
                     _id: productId,
-                    title: "Imperium Luxury Gold Edition",
+
+                    title:
+                        "Imperium Luxury Gold Edition",
+
                     price: 8500,
-                    description: "High-quality luxury timepiece crafted with water-resistant stainless steel dial, quartz movement, and premium finish.",
-                    colors: ["Golden", "Silver", "Black Matte"], // Admin added colors
+
+                    description:
+                        "High-quality luxury timepiece crafted with water-resistant stainless steel dial, quartz movement, and premium finish.",
+
+                    colors: [
+                        "Golden",
+                        "Silver",
+                        "Black Matte"
+                    ],
+
                     images: [
+
                         "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600",
+
                         "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600",
+
                         "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"
+
                     ]
+
                 };
+
             }
+
 
             renderProductDetails();
+
         }
 
-        // 2. Render Details & Form Options
+
+
+        /* =====================================================
+           2. RENDER PRODUCT
+        ====================================================== */
+
         function renderProductDetails() {
-            document.getElementById('loadingState').classList.add('hidden');
-            document.getElementById('productContainer').classList.remove('hidden');
 
-            // Set Title, Price, Description
-            document.getElementById('productTitle').innerText = currentProduct.title;
-            document.getElementById('productPrice').innerText = `Rs. ${currentProduct.price.toLocaleString()}`;
-            document.getElementById('productDescription').innerText = currentProduct.description || "No description provided.";
 
-            // Render Images Carousel & Thumbnails
+            document
+                .getElementById(
+                    'loadingState'
+                )
+                .classList.add(
+                    'hidden'
+                );
+
+
+            document
+                .getElementById(
+                    'productContainer'
+                )
+                .classList.remove(
+                    'hidden'
+                );
+
+
+            /* =============================================
+               TITLE
+            ============================================== */
+
+            document
+                .getElementById(
+                    'productTitle'
+                )
+                .innerText =
+                currentProduct.title ||
+                "Bolani Watch";
+
+
+            /* =============================================
+               PRICE
+            ============================================== */
+
+            document
+                .getElementById(
+                    'productPrice'
+                )
+                .innerText =
+                `Rs. ${Number(
+                    currentProduct.price || 0
+                ).toLocaleString()}`;
+
+
+            /* =============================================
+               DESCRIPTION
+            ============================================== */
+
+            document
+                .getElementById(
+                    'productDescription'
+                )
+                .innerText =
+                currentProduct.description ||
+                "No description provided.";
+
+
+            /* =============================================
+               IMAGES
+            ============================================== */
+
             updateCarouselImage();
+
             renderThumbnails();
+
             populateImageVariantDropdown();
 
-            // Render Colors Option if present
-            const colorSection = document.getElementById('colorSelectionSection');
-            const colorSelect = document.getElementById('colorSelect');
-            
-            if (currentProduct.colors && currentProduct.colors.length > 0) {
-                colorSection.classList.remove('hidden');
-                colorSelect.innerHTML = currentProduct.colors.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            /* =============================================
+               COLORS
+            ============================================== */
+
+            const colorSection =
+                document.getElementById(
+                    'colorSelectionSection'
+                );
+
+
+            const colorSelect =
+                document.getElementById(
+                    'colorSelect'
+                );
+
+
+            if (
+                currentProduct.colors &&
+                currentProduct.colors.length > 0
+            ) {
+
+
+                colorSection
+                    .classList
+                    .remove(
+                        'hidden'
+                    );
+
+
+                colorSelect.innerHTML =
+                    currentProduct.colors
+                        .map(
+                            color =>
+                                `<option value="${color}">
+                                    ${color}
+                                </option>`
+                        )
+                        .join('');
+
+
             } else {
-                colorSection.classList.add('hidden');
+
+
+                colorSection
+                    .classList
+                    .add(
+                        'hidden'
+                    );
+
             }
 
-            // Calculate Initial Total
+
+            /* =============================================
+               INITIAL TOTAL
+            ============================================== */
+
             calculateTotal();
+
         }
 
-        // 3. Carousel Image Controls
+
+
+        /* =====================================================
+           3. UPDATE CAROUSEL
+        ====================================================== */
+
         function updateCarouselImage() {
-            const images = currentProduct.images && currentProduct.images.length > 0 
-                ? currentProduct.images 
-                : ['images/placeholder.jpg'];
 
-            document.getElementById('mainImage').src = images[activeImageIndex];
-            document.getElementById('imageCounter').innerText = `${activeImageIndex + 1} / ${images.length}`;
-            
-            // Highlight thumbnail
-            document.querySelectorAll('.thumb-btn').forEach((thumb, idx) => {
-                if (idx === activeImageIndex) {
-                    thumb.classList.add('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
-                } else {
-                    thumb.classList.remove('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
-                }
-            });
+
+            const images =
+                currentProduct.images &&
+                currentProduct.images.length > 0
+
+                    ? currentProduct.images
+
+                    : [
+                        'images/placeholder.jpg'
+                    ];
+
+
+            if (
+                activeImageIndex >=
+                images.length
+            ) {
+
+                activeImageIndex = 0;
+
+            }
+
+
+            const mainImage =
+                document.getElementById(
+                    'mainImage'
+                );
+
+
+            mainImage.src =
+                images[
+                    activeImageIndex
+                ];
+
+
+            document
+                .getElementById(
+                    'imageCounter'
+                )
+                .innerText =
+                `${activeImageIndex + 1} / ${images.length}`;
+
+
+            /* =============================================
+               ACTIVE THUMBNAIL
+            ============================================== */
+
+            document
+                .querySelectorAll(
+                    '.thumb-button'
+                )
+                .forEach(
+                    (thumb, index) => {
+
+
+                        if (
+                            index ===
+                            activeImageIndex
+                        ) {
+
+                            thumb
+                                .classList
+                                .add(
+                                    'active'
+                                );
+
+                        } else {
+
+                            thumb
+                                .classList
+                                .remove(
+                                    'active'
+                                );
+
+                        }
+
+                    }
+                );
+
         }
+
+
+
+        /* =====================================================
+           4. NEXT IMAGE
+        ====================================================== */
 
         function nextImage() {
-            const images = currentProduct.images || [];
-            if (images.length === 0) return;
-            activeImageIndex = (activeImageIndex + 1) % images.length;
+
+
+            const images =
+                currentProduct.images || [];
+
+
+            if (
+                images.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            activeImageIndex =
+                (
+                    activeImageIndex + 1
+                ) %
+                images.length;
+
+
             updateCarouselImage();
+
         }
+
+
+
+        /* =====================================================
+           5. PREVIOUS IMAGE
+        ====================================================== */
 
         function prevImage() {
-            const images = currentProduct.images || [];
-            if (images.length === 0) return;
-            activeImageIndex = (activeImageIndex - 1 + images.length) % images.length;
+
+
+            const images =
+                currentProduct.images || [];
+
+
+            if (
+                images.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            activeImageIndex =
+                (
+                    activeImageIndex - 1 +
+                    images.length
+                ) %
+                images.length;
+
+
             updateCarouselImage();
+
         }
+
+
+
+        /* =====================================================
+           6. RENDER THUMBNAILS
+        ====================================================== */
 
         function renderThumbnails() {
-            const strip = document.getElementById('thumbnailStrip');
-            const images = currentProduct.images || [];
 
-            if (images.length <= 1) {
-                strip.classList.add('hidden');
+
+            const strip =
+                document.getElementById(
+                    'thumbnailStrip'
+                );
+
+
+            const images =
+                currentProduct.images || [];
+
+
+            if (
+                images.length <= 1
+            ) {
+
+                strip
+                    .classList
+                    .add(
+                        'hidden'
+                    );
+
                 return;
+
             }
 
-            strip.innerHTML = images.map((img, idx) => `
-                <button type="button" onclick="selectImage(${idx})" class="thumb-btn w-14 h-14 rounded-lg bg-[#f6f5f2] border border-[#999a90]/30 p-1 flex-shrink-0 overflow-hidden transition-all">
-                    <img src="${img}" class="w-full h-full object-contain">
-                </button>
-            `).join('');
+
+            strip
+                .classList
+                .remove(
+                    'hidden'
+                );
+
+
+            strip.innerHTML =
+                images
+                    .map(
+                        (img, index) => `
+
+                            <button
+                                type="button"
+                                onclick="selectImage(${index})"
+                                class="thumb-button"
+                            >
+
+                                <img
+                                    src="${img}"
+                                    alt="Product Image ${index + 1}"
+                                >
+
+                            </button>
+
+                        `
+                    )
+                    .join('');
+
+
+            updateCarouselImage();
+
         }
 
-        function selectImage(idx) {
-            activeImageIndex = idx;
+
+
+        /* =====================================================
+           7. SELECT IMAGE
+        ====================================================== */
+
+        function selectImage(index) {
+
+
+            activeImageIndex =
+                index;
+
+
             updateCarouselImage();
-            document.getElementById('imageVariantSelect').value = `Image Variant ${idx + 1}`;
+
+
+            document
+                .getElementById(
+                    'imageVariantSelect'
+                )
+                .value =
+                `Image Variant ${index + 1}`;
+
         }
+
+
+
+        /* =====================================================
+           8. IMAGE VARIANT DROPDOWN
+        ====================================================== */
 
         function populateImageVariantDropdown() {
-            const variantSelect = document.getElementById('imageVariantSelect');
-            const images = currentProduct.images || [1];
 
-            variantSelect.innerHTML = images.map((_, idx) => `
-                <option value="Image Variant ${idx + 1}">Image Variant #${idx + 1}</option>
-            `).join('');
+
+            const variantSelect =
+                document.getElementById(
+                    'imageVariantSelect'
+                );
+
+
+            const images =
+                currentProduct.images || [];
+
+
+            variantSelect.innerHTML =
+                images
+                    .map(
+                        (_, index) => `
+
+                            <option
+                                value="Image Variant ${index + 1}"
+                            >
+                                Image Variant #${index + 1}
+                            </option>
+
+                        `
+                    )
+                    .join('');
+
         }
 
-        // 4. Quantity & Discount Calculation
+
+
+        /* =====================================================
+           9. QUANTITY
+        ====================================================== */
+
         function changeQty(change) {
-            selectedQuantity = Math.max(1, selectedQuantity + change);
-            document.getElementById('qtyDisplay').innerText = selectedQuantity;
+
+
+            selectedQuantity =
+                Math.max(
+                    1,
+                    selectedQuantity + change
+                );
+
+
+            document
+                .getElementById(
+                    'qtyDisplay'
+                )
+                .innerText =
+                selectedQuantity;
+
+
             calculateTotal();
+
         }
+
+
+
+        /* =====================================================
+           10. CALCULATE TOTAL
+        ====================================================== */
 
         function calculateTotal() {
-            let unitPrice = currentProduct.price;
+
+
+            const unitPrice =
+                Number(
+                    currentProduct.price || 0
+                );
+
+
             let discountPercent = 0;
 
-            // Discount logic: 2 watches = 5% off, 3+ watches = 10% off
-            if (selectedQuantity === 2) {
+
+            /*
+             * 2 WATCHES = 5%
+             *
+             * 3+ WATCHES = 10%
+             */
+
+            if (
+                selectedQuantity === 2
+            ) {
+
                 discountPercent = 5;
-            } else if (selectedQuantity >= 3) {
+
+            }
+
+            else if (
+                selectedQuantity >= 3
+            ) {
+
                 discountPercent = 10;
+
             }
 
-            let subtotal = unitPrice * selectedQuantity;
-            let discountAmount = (subtotal * discountPercent) / 100;
-            let finalTotal = subtotal - discountAmount;
 
-            document.getElementById('totalPriceDisplay').innerText = `Rs. ${finalTotal.toLocaleString()}`;
-            
-            const discTag = document.getElementById('discountTag');
-            const discText = document.getElementById('discountText');
+            const subtotal =
+                unitPrice *
+                selectedQuantity;
 
-            if (discountPercent > 0) {
-                discTag.classList.remove('hidden');
-                discText.innerText = `${discountPercent}% Discount Applied (-Rs. ${discountAmount.toLocaleString()})`;
+
+            const discountAmount =
+                (
+                    subtotal *
+                    discountPercent
+                ) / 100;
+
+
+            const finalTotal =
+                subtotal -
+                discountAmount;
+
+
+            document
+                .getElementById(
+                    'totalPriceDisplay'
+                )
+                .innerText =
+                `Rs. ${finalTotal.toLocaleString()}`;
+
+
+            const discountTag =
+                document.getElementById(
+                    'discountTag'
+                );
+
+
+            const discountText =
+                document.getElementById(
+                    'discountText'
+                );
+
+
+            if (
+                discountPercent > 0
+            ) {
+
+
+                discountTag
+                    .classList
+                    .remove(
+                        'hidden'
+                    );
+
+
+                discountText.innerText =
+                    `${discountPercent}% Discount Applied (-Rs. ${discountAmount.toLocaleString()})`;
+
+
             } else {
-                discTag.classList.add('hidden');
-                discText.innerText = "";
+
+
+                discountTag
+                    .classList
+                    .add(
+                        'hidden'
+                    );
+
+
+                discountText.innerText =
+                    "";
+
             }
+
         }
 
-        // 5. Submit Form & Open WhatsApp Chat Box with Details
-        function handleOrderSubmit(e) {
-            e.preventDefault();
 
-            const name = document.getElementById('custName').value;
-            const address = document.getElementById('custAddress').value;
-            const phone = document.getElementById('custPhone').value;
-            
-            const colorSelect = document.getElementById('colorSelect');
-            const selectedColor = (colorSelect && !document.getElementById('colorSelectionSection').classList.contains('hidden')) 
-                ? colorSelect.value 
-                : "Standard";
 
-            const selectedImgVariant = document.getElementById('imageVariantSelect').value;
-            const totalPrice = document.getElementById('totalPriceDisplay').innerText;
-            const selectedImgUrl = currentProduct.images[activeImageIndex] || "N/A";
+        /* =====================================================
+           11. ORDER SUBMIT
+        ====================================================== */
 
-            // Format WhatsApp Message
-            const message = `🛍️ *NEW WATCH ORDER - BOLANI WATCHES* 🛍️\n\n` +
+        function handleOrderSubmit(event) {
+
+
+            event.preventDefault();
+
+
+            /* =============================================
+               CUSTOMER DATA
+            ============================================== */
+
+            const name =
+                document
+                    .getElementById(
+                        'custName'
+                    )
+                    .value;
+
+
+            const address =
+                document
+                    .getElementById(
+                        'custAddress'
+                    )
+                    .value;
+
+
+            const phone =
+                document
+                    .getElementById(
+                        'custPhone'
+                    )
+                    .value;
+
+
+
+            /* =============================================
+               COLOR
+            ============================================== */
+
+            const colorSelect =
+                document.getElementById(
+                    'colorSelect'
+                );
+
+
+            const colorSection =
+                document.getElementById(
+                    'colorSelectionSection'
+                );
+
+
+            const selectedColor =
+                (
+                    colorSelect &&
+                    !colorSection
+                        .classList
+                        .contains(
+                            'hidden'
+                        )
+                )
+
+                    ? colorSelect.value
+
+                    : "Standard";
+
+
+
+            /* =============================================
+               IMAGE VARIANT
+            ============================================== */
+
+            const selectedImgVariant =
+                document
+                    .getElementById(
+                        'imageVariantSelect'
+                    )
+                    .value;
+
+
+
+            /* =============================================
+               TOTAL
+            ============================================== */
+
+            const totalPrice =
+                document
+                    .getElementById(
+                        'totalPriceDisplay'
+                    )
+                    .innerText;
+
+
+
+            /* =============================================
+               IMAGE URL
+            ============================================== */
+
+            const selectedImgUrl =
+                currentProduct.images &&
+                currentProduct.images[
+                    activeImageIndex
+                ]
+
+                    ? currentProduct.images[
+                        activeImageIndex
+                    ]
+
+                    : "N/A";
+
+
+
+            /* =============================================
+               WHATSAPP MESSAGE
+            ============================================== */
+
+            const message =
+
+                `🛍️ *NEW WATCH ORDER - BOLANI WATCHES* 🛍️\n\n` +
+
                 `*Product:* ${currentProduct.title}\n` +
+
                 `*Selected Color:* ${selectedColor}\n` +
+
                 `*Selected Variant:* ${selectedImgVariant}\n` +
+
                 `*Quantity:* ${selectedQuantity}\n` +
+
                 `*Total Price:* ${totalPrice}\n\n` +
+
                 `👤 *Customer Details:*\n` +
+
                 `• *Name:* ${name}\n` +
+
                 `• *Phone:* ${phone}\n` +
+
                 `• *Address:* ${address}\n\n` +
+
                 `🖼️ *Image Link:* ${selectedImgUrl}\n\n` +
+
                 `Please confirm my order!`;
 
-            // Redirect to WhatsApp Chat
-            const whatsappUrl = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+
+
+            /* =============================================
+               WHATSAPP REDIRECT
+            ============================================== */
+
+            const whatsappUrl =
+                `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(
+                    message
+                )}`;
+
+
+            window.open(
+                whatsappUrl,
+                '_blank'
+            );
+
         }
 
-        // Initialize Page
-        document.addEventListener('DOMContentLoaded', loadProductDetail);
+
+
+        /* =====================================================
+           12. IMAGE VARIANT CHANGE
+        ====================================================== */
+
+        document
+            .getElementById(
+                'imageVariantSelect'
+            )
+            .addEventListener(
+                'change',
+                function () {
+
+
+                    const selectedValue =
+                        this.value;
+
+
+                    const index =
+                        parseInt(
+                            selectedValue
+                                .replace(
+                                    'Image Variant ',
+                                    ''
+                                )
+                        ) - 1;
+
+
+                    if (
+                        !isNaN(index)
+                    ) {
+
+                        activeImageIndex =
+                            index;
+
+
+                        updateCarouselImage();
+
+                    }
+
+                }
+            );
+
+
+
+        /* =====================================================
+           13. INITIALIZE PAGE
+        ====================================================== */
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+
+                loadProductDetail();
+
+            }
+        );
+
     </script>
+
+
 </body>
+
 </html>
+```
