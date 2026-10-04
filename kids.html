@@ -1,362 +1,1869 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kids Watch Collection - Bolani Watches</title>
-    
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom Theme Colors & Floating Animations -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-        body {
-            background-color: #f6f5f2; /* Warm Beige Background */
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #3e4656;
+```
+<title>Kids Watch Collection - Bolani Watches</title>
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Google Fonts -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+
+    /* =====================================================
+       GLOBAL
+    ===================================================== */
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        background-color: #f6f5f2;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #3e4656;
+    }
+
+    button,
+    select {
+        font-family: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+
+    /* =====================================================
+       FONTS
+    ===================================================== */
+
+    .font-heading {
+        font-family: 'Cinzel', serif;
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    header {
+        width: 100%;
+        background: rgba(246, 245, 242, 0.90);
+        border-bottom: 1px solid rgba(153, 154, 144, 0.20);
+
+        position: sticky;
+        top: 0;
+        z-index: 50;
+
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+        width: 100%;
+        max-width: 1280px;
+
+        margin: 0 auto;
+
+        padding: 16px 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo-link {
+        display: flex;
+        flex-direction: column;
+
+        text-decoration: none;
+
+        color: #1d2b3a;
+    }
+
+    .logo-title {
+        font-family: 'Cinzel', serif;
+
+        font-size: 30px;
+        font-weight: 700;
+
+        letter-spacing: 0.06em;
+
+        color: #1d2b3a;
+
+        transition: color 0.3s ease;
+    }
+
+    .logo-link:hover .logo-title {
+        color: #8c7a5b;
+    }
+
+    .logo-subtitle {
+        font-size: 10px;
+
+        letter-spacing: 0.20em;
+
+        text-transform: uppercase;
+
+        color: #6b7280;
+    }
+
+    .main-site-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        color: #1d2b3a;
+
+        text-decoration: none;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        transition: all 0.3s ease;
+    }
+
+    .main-site-link:hover {
+        text-decoration: underline;
+    }
+
+
+    /* =====================================================
+       FLOATING CATEGORY IMAGE ANIMATION
+    ===================================================== */
+
+    @keyframes floatEffect {
+
+        0% {
+            transform: translateY(0px) rotate(0deg);
         }
 
-        .font-heading {
-            font-family: 'Cinzel', serif;
+        50% {
+            transform: translateY(-8px) rotate(2deg);
         }
 
-        /* Continuous Floating Animation for Category PNGs */
-        @keyframes floatEffect {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+        100% {
+            transform: translateY(0px) rotate(0deg);
         }
 
-        .float-img {
-            animation: floatEffect 3.5s ease-in-out infinite;
+    }
+
+    .float-img {
+        animation: floatEffect 3.5s ease-in-out infinite;
+    }
+
+    .float-delay-1 {
+        animation-delay: 0.5s;
+    }
+
+    .float-delay-2 {
+        animation-delay: 1s;
+    }
+
+    .float-delay-3 {
+        animation-delay: 1.5s;
+    }
+
+    .float-delay-4 {
+        animation-delay: 2s;
+    }
+
+
+    /* =====================================================
+       MAIN CATEGORY SECTION
+    ===================================================== */
+
+    .category-section {
+        width: 100%;
+        max-width: 1280px;
+
+        margin: 0 auto;
+
+        padding: 24px 16px;
+    }
+
+    .section-heading {
+        text-align: center;
+
+        margin-bottom: 24px;
+    }
+
+    .section-heading h1 {
+        font-family: 'Cinzel', serif;
+
+        font-size: 36px;
+        line-height: 1.25;
+
+        font-weight: 700;
+
+        color: #1d2b3a;
+    }
+
+    .section-heading p {
+        margin-top: 4px;
+
+        font-size: 14px;
+
+        color: #6b7280;
+    }
+
+
+    /* =====================================================
+       CATEGORY FILTER ROW
+    ===================================================== */
+
+    .category-filter-row {
+
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        gap: 24px;
+
+        overflow-x: auto;
+
+        padding-top: 8px;
+        padding-bottom: 16px;
+
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .category-filter-row::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    /* =====================================================
+       CATEGORY BUTTON
+    ===================================================== */
+
+    .category-btn {
+
+        flex-shrink: 0;
+
+        width: 120px;
+
+        min-height: 112px;
+
+        padding: 12px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background: #ffffff;
+
+        border: 1px solid rgba(153, 154, 144, 0.30);
+
+        border-radius: 16px;
+
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .category-btn:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+
+        transform: translateY(-2px);
+    }
+
+    .category-btn.active {
+        border-color: #1d2b3a;
+
+        box-shadow:
+            0 0 0 2px #1d2b3a,
+            0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .category-image-box {
+
+        width: 64px;
+        height: 64px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+    }
+
+    .category-image-box img {
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+    }
+
+    .category-name {
+
+        margin-top: 8px;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        text-transform: uppercase;
+
+        color: #1d2b3a;
+
+        text-align: center;
+    }
+
+
+    /* =====================================================
+       PRICE FILTER
+    ===================================================== */
+
+    .filter-bar {
+
+        margin-top: 16px;
+
+        width: 100%;
+
+        background: #ffffff;
+
+        padding: 16px;
+
+        border-radius: 12px;
+
+        border: 1px solid rgba(153, 154, 144, 0.20);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 16px;
+
+        flex-wrap: wrap;
+    }
+
+    .active-filter {
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: #1d2b3a;
+    }
+
+    .active-filter span {
+
+        color: #8c7a5b;
+
+        font-weight: 700;
+    }
+
+    .price-filter {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+    }
+
+    .price-filter label {
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        color: #3e4656;
+
+        white-space: nowrap;
+    }
+
+    #priceSort {
+
+        min-width: 220px;
+
+        padding: 7px 12px;
+
+        background: #f6f5f2;
+
+        border: 1px solid rgba(153, 154, 144, 0.30);
+
+        border-radius: 8px;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: #1d2b3a;
+
+        outline: none;
+    }
+
+    #priceSort:focus {
+
+        border-color: #1d2b3a;
+
+        box-shadow: 0 0 0 2px rgba(29, 43, 58, 0.10);
+    }
+
+
+    /* =====================================================
+       PRODUCTS SECTION
+    ===================================================== */
+
+    .products-section {
+
+        width: 100%;
+
+        max-width: 1280px;
+
+        margin: 0 auto;
+
+        padding: 16px;
+
+        flex: 1;
+    }
+
+    #productsGrid {
+
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+    .loading-box {
+
+        grid-column: 1 / -1;
+
+        text-align: center;
+
+        padding: 48px 20px;
+    }
+
+    .loading-box i {
+
+        font-size: 30px;
+
+        color: #1d2b3a;
+    }
+
+    .loading-box p {
+
+        margin-top: 8px;
+
+        font-size: 14px;
+
+        color: #6b7280;
+    }
+
+
+    /* =====================================================
+       PRODUCT CARD
+    ===================================================== */
+
+    .product-card {
+
+        cursor: pointer;
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        border: 1px solid rgba(153, 154, 144, 0.25);
+
+        overflow: hidden;
+
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .product-card:hover {
+
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+
+        transform: translateY(-3px);
+    }
+
+
+    /* =====================================================
+       PRODUCT IMAGE
+    ===================================================== */
+
+    .product-image {
+
+        position: relative;
+
+        width: 100%;
+
+        height: 208px;
+
+        background: #f6f5f2;
+
+        overflow: hidden;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 12px;
+    }
+
+    .product-image img {
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+
+        transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+
+        transform: scale(1.10);
+    }
+
+    .product-type {
+
+        position: absolute;
+
+        top: 8px;
+        left: 8px;
+
+        background: #1d2b3a;
+
+        color: #ffffff;
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+        padding: 3px 7px;
+
+        border-radius: 999px;
+
+        text-transform: uppercase;
+    }
+
+
+    /* =====================================================
+       PRODUCT BODY
+    ===================================================== */
+
+    .product-body {
+
+        padding: 16px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        flex: 1;
+    }
+
+    .product-title {
+
+        font-size: 16px;
+
+        font-weight: 700;
+
+        color: #1d2b3a;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        transition: color 0.3s ease;
+    }
+
+    .product-card:hover .product-title {
+
+        color: #8c7a5b;
+    }
+
+    .product-description {
+
+        margin-top: 2px;
+
+        font-size: 12px;
+
+        color: #6b7280;
+    }
+
+    .product-bottom {
+
+        margin-top: 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 8px;
+    }
+
+    .product-price {
+
+        font-size: 18px;
+
+        font-weight: 700;
+
+        color: #1d2b3a;
+
+        white-space: nowrap;
+    }
+
+    .details-btn {
+
+        border: none;
+
+        background: #1d2b3a;
+
+        color: #ffffff;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        padding: 7px 10px;
+
+        border-radius: 8px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 5px;
+
+        transition: background 0.3s ease;
+    }
+
+    .details-btn:hover {
+
+        background: #8c7a5b;
+    }
+
+
+    /* =====================================================
+       EMPTY PRODUCTS
+    ===================================================== */
+
+    .empty-products {
+
+        grid-column: 1 / -1;
+
+        text-align: center;
+
+        padding: 48px 20px;
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        border: 1px solid rgba(153, 154, 144, 0.20);
+    }
+
+    .empty-products i {
+
+        font-size: 40px;
+
+        color: #999a90;
+
+        margin-bottom: 8px;
+    }
+
+    .empty-products p:first-of-type {
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: #1d2b3a;
+    }
+
+    .empty-products p:last-of-type {
+
+        margin-top: 4px;
+
+        font-size: 12px;
+
+        color: #6b7280;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+
+        width: 100%;
+
+        margin-top: 32px;
+
+        padding: 16px;
+
+        background: #3e4656;
+
+        color: #ffffff;
+
+        text-align: center;
+
+        font-size: 14px;
+    }
+
+    footer span {
+
+        font-weight: 700;
+
+        color: #f6f5f2;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media (max-width: 900px) {
+
+        #productsGrid {
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
         }
 
-        .float-delay-1 { animation-delay: 0.5s; }
-        .float-delay-2 { animation-delay: 1s; }
-        .float-delay-3 { animation-delay: 1.5s; }
-        .float-delay-4 { animation-delay: 2s; }
+        .category-filter-row {
 
-        /* Hide Scrollbar for Horizontal Filter on Mobile */
-        .no-scrollbar::-webkit-scrollbar {
+            justify-content: flex-start;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 600px) {
+
+        .header-inner {
+
+            padding: 14px 16px;
+
+        }
+
+        .logo-title {
+
+            font-size: 23px;
+
+        }
+
+        .logo-subtitle {
+
+            font-size: 9px;
+
+        }
+
+        .main-site-link {
+
+            font-size: 12px;
+
+        }
+
+
+        .category-section {
+
+            padding: 20px 12px;
+
+        }
+
+        .section-heading {
+
+            margin-bottom: 18px;
+
+        }
+
+        .section-heading h1 {
+
+            font-size: 24px;
+
+        }
+
+        .section-heading p {
+
+            font-size: 12px;
+
+        }
+
+
+        .category-filter-row {
+
+            justify-content: flex-start;
+
+            gap: 12px;
+
+        }
+
+        .category-btn {
+
+            width: 80px;
+
+            min-height: 92px;
+
+            padding: 8px;
+
+            border-radius: 16px;
+
+        }
+
+        .category-image-box {
+
+            width: 48px;
+
+            height: 48px;
+
+        }
+
+        .category-name {
+
+            font-size: 10px;
+
+            margin-top: 7px;
+
+        }
+
+
+        .filter-bar {
+
+            padding: 12px;
+
+            gap: 10px;
+
+            align-items: flex-start;
+
+        }
+
+        .active-filter {
+
+            width: 100%;
+
+            font-size: 12px;
+
+        }
+
+        .price-filter {
+
+            width: 100%;
+
+        }
+
+        .price-filter label {
+
+            font-size: 11px;
+
+        }
+
+        #priceSort {
+
+            flex: 1;
+
+            min-width: 0;
+
+            width: 100%;
+
+            font-size: 12px;
+
+        }
+
+
+        .products-section {
+
+            padding: 12px 8px;
+
+        }
+
+        #productsGrid {
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            gap: 8px;
+
+        }
+
+
+        .product-card {
+
+            border-radius: 12px;
+
+        }
+
+        .product-image {
+
+            height: 112px;
+
+            padding: 4px;
+
+        }
+
+        .product-type {
+
+            top: 4px;
+
+            left: 4px;
+
+            font-size: 8px;
+
+            padding: 2px 5px;
+
+        }
+
+        .product-body {
+
+            padding: 6px;
+
+        }
+
+        .product-title {
+
+            font-size: 10px;
+
+        }
+
+        .product-description {
+
             display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BAR: Text Logo & Navigation -->
-    <header class="w-full bg-[#f6f5f2] border-b border-[#999a90]/20 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <!-- Text Base Logo -->
-            <a href="index.html" class="group flex flex-col">
-                <span class="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-[#1d2b3a] group-hover:text-[#8c7a5b] transition-colors">
-                    BOLANI WATCHES
-                </span>
-                <span class="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#6b7280]">
-                    Luxury & Kids Timepieces
-                </span>
+        }
+
+        .product-bottom {
+
+            margin-top: 6px;
+
+            flex-direction: column;
+
+            align-items: stretch;
+
+            gap: 4px;
+
+        }
+
+        .product-price {
+
+            font-size: 11px;
+
+        }
+
+        .details-btn {
+
+            width: 100%;
+
+            padding: 4px 5px;
+
+            font-size: 9px;
+
+            border-radius: 5px;
+
+        }
+
+        .details-btn i {
+
+            font-size: 7px;
+
+        }
+
+
+        .loading-box {
+
+            padding: 40px 10px;
+
+        }
+
+        .empty-products {
+
+            padding: 40px 15px;
+
+        }
+
+        .empty-products i {
+
+            font-size: 34px;
+
+        }
+
+        .empty-products p:first-of-type {
+
+            font-size: 12px;
+
+        }
+
+        .empty-products p:last-of-type {
+
+            font-size: 10px;
+
+        }
+
+
+        footer {
+
+            padding: 14px;
+
+            font-size: 11px;
+
+        }
+
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<header>
+
+    <div class="header-inner">
+
+        <a href="index.html" class="logo-link">
+
+            <span class="logo-title">
+                BOLANI WATCHES
+            </span>
+
+            <span class="logo-subtitle">
+                Luxury & Kids Timepieces
+            </span>
+
+        </a>
+
+
+        <div>
+
+            <a href="index.html" class="main-site-link">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Main Site
+
             </a>
 
-            <!-- Back to Home -->
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[#1d2b3a] hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-arrow-left"></i> Main Site
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- SECTION 1: KIDS CATEGORY FILTERS & SECONDARY FILTERS -->
-    <section class="w-full py-6 px-3 sm:px-6 max-w-7xl mx-auto">
-        
-        <div class="text-center mb-6">
-            <h1 class="font-heading text-2xl sm:text-4xl font-bold text-[#1d2b3a]">🎈 Kids Fun Collection</h1>
-            <p class="text-xs sm:text-sm text-[#6b7280] mt-1">Select a category to explore kids timepieces</p>
         </div>
 
-        <!-- 5 Visual Floating PNG Category Filters for Kids -->
-        <div class="flex justify-start md:justify-center items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar pb-4 pt-2">
-            
-            <!-- Category 1: ALL KIDS -->
-            <button onclick="filterKidsType('ALL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#1d2b3a] ring-2 ring-[#1d2b3a] shadow-sm hover:shadow-md transition-all w-[80px] sm:w-[120px]" data-kids="ALL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101455.png" alt="All Kids Watches" class="w-full h-full object-contain float-img">
-                </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">All Kids</span>
-            </button>
+    </div>
 
-            <!-- Category 2: CARTOON & HERO -->
-            <button onclick="filterKidsType('CARTOON')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[80px] sm:w-[120px]" data-kids="CARTOON">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG9864.png" alt="Cartoon & Hero Watches" class="w-full h-full object-contain float-img float-delay-1">
-                </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">🦸 Cartoon</span>
-            </button>
+</header>
 
-            <!-- Category 3: DIGITAL & LED -->
-            <button onclick="filterKidsType('DIGITAL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[80px] sm:w-[120px]" data-kids="DIGITAL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101438.png" alt="Digital & LED Watches" class="w-full h-full object-contain float-img float-delay-2">
-                </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">⚡ Digital</span>
-            </button>
 
-            <!-- Category 4: COLORFUL -->
-            <button onclick="filterKidsType('COLORFUL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[80px] sm:w-[120px]" data-kids="COLORFUL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG9859.png" alt="Colorful Strap Watches" class="w-full h-full object-contain float-img float-delay-3">
-                </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">🎨 Colorful</span>
-            </button>
+<!-- =====================================================
+     SECTION 1
+====================================================== -->
 
-            <!-- Category 5: SPORTS & SMART -->
-            <button onclick="filterKidsType('SPORTS')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[80px] sm:w-[120px]" data-kids="SPORTS">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101442.png" alt="Sports Watches" class="w-full h-full object-contain float-img float-delay-4">
-                </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">⚽ Sports</span>
-            </button>
-        </div>
+<section class="category-section">
 
-        <!-- SECONDARY FILTER: Price Sorting & Range Selector -->
-        <div class="mt-4 bg-white p-3 sm:p-4 rounded-xl border border-[#999a90]/20 flex flex-wrap justify-between items-center gap-3">
-            
-            <!-- Active Label -->
-            <div class="text-xs sm:text-sm font-semibold text-[#1d2b3a]">
-                Active Filter: <span id="activeFilterLabel" class="text-[#8c7a5b] font-bold">ALL KIDS</span>
+    <div class="section-heading">
+
+        <h1>
+            🎈 Kids Fun Collection
+        </h1>
+
+        <p>
+            Select a category to explore kids timepieces
+        </p>
+
+    </div>
+
+
+    <!-- CATEGORY FILTERS -->
+
+    <div class="category-filter-row">
+
+
+        <!-- ALL KIDS -->
+
+        <button
+            onclick="filterKidsType('ALL')"
+            class="category-btn active"
+            data-kids="ALL">
+
+            <div class="category-image-box">
+
+                <img
+                    src="https://pngimg.com/uploads/watches/watches_PNG101455.png"
+                    alt="All Kids Watches"
+                    class="float-img">
+
             </div>
 
-            <!-- Price Dropdown Filters -->
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-                <label for="priceSort" class="text-xs font-bold text-[#3e4656] whitespace-nowrap">Price Filter:</label>
-                <select id="priceSort" onchange="applyFilters()" class="w-full sm:w-auto bg-[#f6f5f2] border border-[#999a90]/30 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
-                    <option value="ALL">All Prices (Rs. 800 - 5,000)</option>
-                    <option value="LOW_HIGH">Price: Low to High</option>
-                    <option value="HIGH_LOW">Price: High to Low</option>
-                    <option value="UNDER_1500">Under Rs. 1,500</option>
-                    <option value="1500_3000">Rs. 1,500 - Rs. 3,000</option>
-                    <option value="ABOVE_3000">Above Rs. 3,000</option>
-                </select>
+            <span class="category-name">
+                All Kids
+            </span>
+
+        </button>
+
+
+        <!-- CARTOON -->
+
+        <button
+            onclick="filterKidsType('CARTOON')"
+            class="category-btn"
+            data-kids="CARTOON">
+
+            <div class="category-image-box">
+
+                <img
+                    src="https://pngimg.com/uploads/watches/watches_PNG9864.png"
+                    alt="Cartoon & Hero Watches"
+                    class="float-img float-delay-1">
+
             </div>
-        </div>
-    </section>
 
-    <!-- SECTION 2: PRODUCTS DYNAMIC GRID -->
-    <!-- Mobile: 3 cards horizontal per row | Desktop: 4 cards per row -->
-    <main class="w-full py-4 px-2 sm:px-6 max-w-7xl mx-auto flex-1">
-        
-        <!-- Products Container -->
-        <div id="productsGrid" class="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-5">
-            <!-- Dynamic Cards will be rendered here via Backend API Script -->
-            <div class="col-span-3 md:col-span-4 text-center py-12">
-                <i class="fa-solid fa-spinner fa-spin text-3xl text-[#1d2b3a]"></i>
-                <p class="text-sm mt-2 text-[#6b7280]">Loading Kids Collection...</p>
+            <span class="category-name">
+                🦸 Cartoon
+            </span>
+
+        </button>
+
+
+        <!-- DIGITAL -->
+
+        <button
+            onclick="filterKidsType('DIGITAL')"
+            class="category-btn"
+            data-kids="DIGITAL">
+
+            <div class="category-image-box">
+
+                <img
+                    src="https://pngimg.com/uploads/watches/watches_PNG101438.png"
+                    alt="Digital & LED Watches"
+                    class="float-img float-delay-2">
+
             </div>
+
+            <span class="category-name">
+                ⚡ Digital
+            </span>
+
+        </button>
+
+
+        <!-- COLORFUL -->
+
+        <button
+            onclick="filterKidsType('COLORFUL')"
+            class="category-btn"
+            data-kids="COLORFUL">
+
+            <div class="category-image-box">
+
+                <img
+                    src="https://pngimg.com/uploads/watches/watches_PNG9859.png"
+                    alt="Colorful Strap Watches"
+                    class="float-img float-delay-3">
+
+            </div>
+
+            <span class="category-name">
+                🎨 Colorful
+            </span>
+
+        </button>
+
+
+        <!-- SPORTS -->
+
+        <button
+            onclick="filterKidsType('SPORTS')"
+            class="category-btn"
+            data-kids="SPORTS">
+
+            <div class="category-image-box">
+
+                <img
+                    src="https://pngimg.com/uploads/watches/watches_PNG101442.png"
+                    alt="Sports Watches"
+                    class="float-img float-delay-4">
+
+            </div>
+
+            <span class="category-name">
+                ⚽ Sports
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- PRICE FILTER -->
+
+    <div class="filter-bar">
+
+
+        <div class="active-filter">
+
+            Active Filter:
+
+            <span id="activeFilterLabel">
+                ALL KIDS
+            </span>
+
         </div>
 
-    </main>
 
-    <!-- FOOTER -->
-    <footer class="w-full bg-[#3e4656] text-white text-center py-4 text-xs sm:text-sm mt-8">
-        <p>Web Created By <span class="font-bold text-[#f6f5f2]">@Amin Bolani</span></p>
-    </footer>
+        <div class="price-filter">
 
-    <!-- JAVASCRIPT: Backend Dynamic Fetch & Frontend Filter Logic -->
-    <script>
-        // Global Variables for Kids Products
-        let allProducts = [];
-        let currentKidsType = 'ALL';
+            <label for="priceSort">
+                Price Filter:
+            </label>
 
-        // 1. Fetch Products from Backend Node.js / MongoDB Atlas API
-        async function fetchKidsProducts() {
-            try {
-                // MongoDB API Endpoint for Kids Category
-                const response = await fetch('https://watches-backend-cyan.vercel.app/api/products?category=kids');
-                
-                if (!response.ok) {
-                    throw new Error('API error');
-                }
-                
-                allProducts = await response.json();
-                applyFilters();
 
-            } catch (error) {
-                console.log('Using local fallback mock data for testing:', error);
-                
-                // Fallback Mock Data for Kids Collection
-                allProducts = [
-                    {
-                        _id: "k1",
-                        title: "Spiderman 3D Projection Watch",
-                        kidsType: "CARTOON",
-                        price: 1200,
-                        images: ["https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"]
-                    },
-                    {
-                        _id: "k2",
-                        title: "LED Light Multi-Function Digital",
-                        kidsType: "DIGITAL",
-                        price: 1800,
-                        images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"]
-                    },
-                    {
-                        _id: "k3",
-                        title: "Rainbow Soft Silicone Strap",
-                        kidsType: "COLORFUL",
-                        price: 950,
-                        images: ["https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"]
-                    },
-                    {
-                        _id: "k4",
-                        title: "Junior Waterproof Sports Edition",
-                        kidsType: "SPORTS",
-                        price: 2500,
-                        images: ["https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"]
-                    },
-                    {
-                        _id: "k5",
-                        title: "Barbie Princess Dial Pink",
-                        kidsType: "CARTOON",
-                        price: 1350,
-                        images: ["https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"]
-                    },
-                    {
-                        _id: "k6",
-                        title: "Camouflage Digital Outdoor Watch",
-                        kidsType: "DIGITAL",
-                        price: 2100,
-                        images: ["https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"]
-                    }
-                ];
+            <select
+                id="priceSort"
+                onchange="applyFilters()">
 
-                applyFilters();
+                <option value="ALL">
+                    All Prices (Rs. 800 - 5,000)
+                </option>
+
+                <option value="LOW_HIGH">
+                    Price: Low to High
+                </option>
+
+                <option value="HIGH_LOW">
+                    Price: High to Low
+                </option>
+
+                <option value="UNDER_1500">
+                    Under Rs. 1,500
+                </option>
+
+                <option value="1500_3000">
+                    Rs. 1,500 - Rs. 3,000
+                </option>
+
+                <option value="ABOVE_3000">
+                    Above Rs. 3,000
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS SECTION
+====================================================== -->
+
+<main class="products-section">
+
+    <div id="productsGrid">
+
+        <div class="loading-box">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>
+                Loading Kids Collection...
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <p>
+        Web Created By
+
+        <span>
+            @Amin Bolani
+        </span>
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    // =====================================================
+    // GLOBAL VARIABLES
+    // =====================================================
+
+    let allProducts = [];
+
+    let currentKidsType = 'ALL';
+
+
+    // =====================================================
+    // FETCH KIDS PRODUCTS
+    // =====================================================
+
+    async function fetchKidsProducts() {
+
+        try {
+
+            const response = await fetch(
+                'https://watches-backend-cyan.vercel.app/api/products?category=kids'
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error('API error');
+
             }
+
+
+            allProducts = await response.json();
+
+
+            applyFilters();
+
+
+        } catch (error) {
+
+            console.log(
+                'Using local fallback mock data for testing:',
+                error
+            );
+
+
+            // =================================================
+            // FALLBACK MOCK DATA
+            // =================================================
+
+            allProducts = [
+
+                {
+                    _id: "k1",
+
+                    title:
+                        "Spiderman 3D Projection Watch",
+
+                    kidsType:
+                        "CARTOON",
+
+                    price:
+                        1200,
+
+                    images: [
+                        "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"
+                    ]
+                },
+
+
+                {
+                    _id: "k2",
+
+                    title:
+                        "LED Light Multi-Function Digital",
+
+                    kidsType:
+                        "DIGITAL",
+
+                    price:
+                        1800,
+
+                    images: [
+                        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+                    ]
+                },
+
+
+                {
+                    _id: "k3",
+
+                    title:
+                        "Rainbow Soft Silicone Strap",
+
+                    kidsType:
+                        "COLORFUL",
+
+                    price:
+                        950,
+
+                    images: [
+                        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"
+                    ]
+                },
+
+
+                {
+                    _id: "k4",
+
+                    title:
+                        "Junior Waterproof Sports Edition",
+
+                    kidsType:
+                        "SPORTS",
+
+                    price:
+                        2500,
+
+                    images: [
+                        "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"
+                    ]
+                },
+
+
+                {
+                    _id: "k5",
+
+                    title:
+                        "Barbie Princess Dial Pink",
+
+                    kidsType:
+                        "CARTOON",
+
+                    price:
+                        1350,
+
+                    images: [
+                        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"
+                    ]
+                },
+
+
+                {
+                    _id: "k6",
+
+                    title:
+                        "Camouflage Digital Outdoor Watch",
+
+                    kidsType:
+                        "DIGITAL",
+
+                    price:
+                        2100,
+
+                    images: [
+                        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
+                    ]
+                }
+
+            ];
+
+
+            applyFilters();
+
         }
 
-        // 2. Filter by Kids Category Icon Click
-        function filterKidsType(type) {
-            currentKidsType = type;
-            
-            // Update Active UI States
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                if (btn.getAttribute('data-kids') === type) {
-                    btn.classList.add('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]', 'bg-white');
-                    btn.classList.remove('border-[#999a90]/30');
+    }
+
+
+    // =====================================================
+    // KIDS CATEGORY FILTER
+    // =====================================================
+
+    function filterKidsType(type) {
+
+        currentKidsType = type;
+
+
+        // Update Active Button
+
+        document
+            .querySelectorAll('.category-btn')
+            .forEach(btn => {
+
+                if (
+                    btn.getAttribute('data-kids') === type
+                ) {
+
+                    btn.classList.add('active');
+
                 } else {
-                    btn.classList.remove('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
-                    btn.classList.add('border-[#999a90]/30');
+
+                    btn.classList.remove('active');
+
                 }
+
             });
 
-            const labels = {
-                'ALL': 'ALL KIDS',
-                'CARTOON': '🦸 CARTOON & HERO',
-                'DIGITAL': '⚡ DIGITAL & LED',
-                'COLORFUL': '🎨 COLORFUL',
-                'SPORTS': '⚽ SPORTS & SMART'
-            };
 
-            document.getElementById('activeFilterLabel').innerText = labels[type] || type;
-            applyFilters();
+        // Active Filter Labels
+
+        const labels = {
+
+            ALL:
+                'ALL KIDS',
+
+            CARTOON:
+                '🦸 CARTOON & HERO',
+
+            DIGITAL:
+                '⚡ DIGITAL & LED',
+
+            COLORFUL:
+                '🎨 COLORFUL',
+
+            SPORTS:
+                '⚽ SPORTS & SMART'
+
+        };
+
+
+        document.getElementById(
+            'activeFilterLabel'
+        ).innerText =
+            labels[type] || type;
+
+
+        applyFilters();
+
+    }
+
+
+    // =====================================================
+    // APPLY FILTERS
+    // =====================================================
+
+    function applyFilters() {
+
+        let filtered = [
+            ...allProducts
+        ];
+
+
+        // -------------------------------------------------
+        // Kids Type Filter
+        // -------------------------------------------------
+
+        if (currentKidsType !== 'ALL') {
+
+            filtered =
+                filtered.filter(product => {
+
+                    return (
+                        product.kidsType &&
+                        product.kidsType.toUpperCase()
+                            === currentKidsType
+                    );
+
+                });
+
         }
 
-        // 3. Combined Filtering (Type + Price) & Rendering
-        function applyFilters() {
-            let filtered = [...allProducts];
 
-            // Kids Type Filter
-            if (currentKidsType !== 'ALL') {
-                filtered = filtered.filter(p => p.kidsType.toUpperCase() === currentKidsType);
-            }
+        // -------------------------------------------------
+        // Price Filter
+        // -------------------------------------------------
 
-            // Price Sorting / Filtering
-            const priceVal = document.getElementById('priceSort').value;
-            if (priceVal === 'LOW_HIGH') {
-                filtered.sort((a, b) => a.price - b.price);
-            } else if (priceVal === 'HIGH_LOW') {
-                filtered.sort((a, b) => b.price - a.price);
-            } else if (priceVal === 'UNDER_1500') {
-                filtered = filtered.filter(p => p.price <= 1500);
-            } else if (priceVal === '1500_3000') {
-                filtered = filtered.filter(p => p.price >= 1500 && p.price <= 3000);
-            } else if (priceVal === 'ABOVE_3000') {
-                filtered = filtered.filter(p => p.price > 3000);
-            }
+        const priceVal =
+            document.getElementById(
+                'priceSort'
+            ).value;
 
-            renderProducts(filtered);
+
+        if (priceVal === 'LOW_HIGH') {
+
+            filtered.sort(
+                (a, b) =>
+                    Number(a.price) -
+                    Number(b.price)
+            );
+
         }
 
-        // 4. Render Grid Cards (Mobile: 3 per row | Desktop: 4 per row)
-        function renderProducts(products) {
-            const grid = document.getElementById('productsGrid');
 
-            if (products.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-3 md:col-span-4 text-center py-12 bg-white rounded-2xl border border-[#999a90]/20">
-                        <i class="fa-solid fa-box-open text-4xl text-[#999a90] mb-2"></i>
-                        <p class="text-sm font-semibold text-[#1d2b3a]">Is category mein koi kids watch nahi mili.</p>
-                        <p class="text-xs text-[#6b7280]">Dusri category ya price filter check karein.</p>
-                    </div>
-                `;
-                return;
-            }
+        else if (priceVal === 'HIGH_LOW') {
 
-            grid.innerHTML = products.map(product => `
-                <div onclick="goToDetail('${product._id}')" class="cursor-pointer group bg-white rounded-xl sm:rounded-2xl border border-[#999a90]/25 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-                    
-                    <!-- Product Image Container -->
-                    <div class="relative w-full h-28 sm:h-52 bg-[#f6f5f2] overflow-hidden flex items-center justify-center p-1 sm:p-3">
-                        <img src="${product.images && product.images.length > 0 ? product.images[0] : 'images/placeholder.jpg'}" 
-                             alt="${product.title}" 
-                             class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                             
-                        <span class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-[#1d2b3a] text-white text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
-                            ${product.kidsType}
-                        </span>
-                    </div>
+            filtered.sort(
+                (a, b) =>
+                    Number(b.price) -
+                    Number(a.price)
+            );
 
-                    <!-- Card Body -->
-                    <div class="p-1.5 sm:p-4 flex flex-col justify-between flex-1">
-                        <div>
-                            <h3 class="text-[10px] sm:text-base font-bold text-[#1d2b3a] line-clamp-1 group-hover:text-[#8c7a5b] transition-colors">
-                                ${product.title}
-                            </h3>
-                            <p class="text-[9px] sm:text-xs text-[#6b7280] hidden sm:block mt-0.5">
-                                Kid's Favorite Watch
-                            </p>
-                        </div>
+        }
 
-                        <div class="mt-1.5 sm:mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                            <span class="text-[11px] sm:text-lg font-bold text-[#1d2b3a]">
-                                Rs. ${product.price.toLocaleString()}
-                            </span>
-                            
-                            <button class="w-full sm:w-auto bg-[#1d2b3a] text-white text-[9px] sm:text-xs font-semibold py-1 px-2 rounded sm:rounded-lg group-hover:bg-[#8c7a5b] transition-colors flex items-center justify-center gap-1">
-                                <span>Details</span>
-                                <i class="fa-solid fa-chevron-right text-[7px] sm:text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
+
+        else if (priceVal === 'UNDER_1500') {
+
+            filtered =
+                filtered.filter(
+                    product =>
+                        Number(product.price) <= 1500
+                );
+
+        }
+
+
+        else if (priceVal === '1500_3000') {
+
+            filtered =
+                filtered.filter(
+                    product =>
+                        Number(product.price) >= 1500 &&
+                        Number(product.price) <= 3000
+                );
+
+        }
+
+
+        else if (priceVal === 'ABOVE_3000') {
+
+            filtered =
+                filtered.filter(
+                    product =>
+                        Number(product.price) > 3000
+                );
+
+        }
+
+
+        renderProducts(filtered);
+
+    }
+
+
+    // =====================================================
+    // RENDER PRODUCTS
+    // =====================================================
+
+    function renderProducts(products) {
+
+        const grid =
+            document.getElementById(
+                'productsGrid'
+            );
+
+
+        // -------------------------------------------------
+        // No Products
+        // -------------------------------------------------
+
+        if (products.length === 0) {
+
+            grid.innerHTML = `
+
+                <div class="empty-products">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <p>
+                        Is category mein koi kids watch nahi mili.
+                    </p>
+
+                    <p>
+                        Dusri category ya price filter check karein.
+                    </p>
+
                 </div>
-            `).join('');
+
+            `;
+
+            return;
+
         }
 
-        // 5. Navigate to Details Page
-        function goToDetail(productId) {
-            window.location.href = `product-detail.html?id=${productId}`;
-        }
 
-        // Initial Load Call
-        document.addEventListener('DOMContentLoaded', fetchKidsProducts);
-    </script>
+        // -------------------------------------------------
+        // Product Cards
+        // -------------------------------------------------
+
+        grid.innerHTML =
+            products.map(product => {
+
+                const image =
+                    product.images &&
+                    product.images.length > 0
+
+                        ? product.images[0]
+
+                        : 'images/placeholder.jpg';
+
+
+                const price =
+                    Number(product.price) || 0;
+
+
+                const kidsType =
+                    product.kidsType ||
+                    'KIDS';
+
+
+                return `
+
+                    <div
+                        onclick="goToDetail('${product._id}')"
+                        class="product-card"
+                    >
+
+
+                        <!-- PRODUCT IMAGE -->
+
+                        <div class="product-image">
+
+                            <img
+                                src="${image}"
+                                alt="${product.title}"
+                            >
+
+
+                            <span class="product-type">
+
+                                ${kidsType}
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- PRODUCT BODY -->
+
+                        <div class="product-body">
+
+
+                            <div>
+
+                                <h3 class="product-title">
+
+                                    ${product.title}
+
+                                </h3>
+
+
+                                <p class="product-description">
+
+                                    Kid's Favorite Watch
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="product-bottom">
+
+
+                                <span class="product-price">
+
+                                    Rs.
+                                    ${price.toLocaleString()}
+
+                                </span>
+
+
+                                <button
+                                    class="details-btn"
+                                >
+
+                                    <span>
+                                        Details
+                                    </span>
+
+                                    <i class="fa-solid fa-chevron-right"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join('');
+
+    }
+
+
+    // =====================================================
+    // PRODUCT DETAIL PAGE
+    // =====================================================
+
+    function goToDetail(productId) {
+
+        window.location.href =
+            `product-detail.html?id=${productId}`;
+
+    }
+
+
+    // =====================================================
+    // INITIAL LOAD
+    // =====================================================
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        fetchKidsProducts
+    );
+
+</script>
+```
+
 </body>
 </html>
