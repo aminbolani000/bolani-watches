@@ -1334,22 +1334,25 @@
 
 
 
-   ```html
+  ```html
 <script>
 
 /* =====================================================
    WOMEN PRODUCTS
-   DATABASE MATERIAL VALUES:
+   DATABASE:
+   category = "women"
+
+   MATERIAL VALUES:
    Stainless Steel
    Leather Strap
    Silicone / Rubber
    Chain / Mesh
-====================================================== */
+===================================================== */
 
 
 /* =====================================================
    1. GLOBAL VARIABLES
-====================================================== */
+===================================================== */
 
 let allProducts = [];
 
@@ -1359,7 +1362,7 @@ let currentMaterial = 'ALL';
 
 /* =====================================================
    2. FETCH WOMEN PRODUCTS
-====================================================== */
+===================================================== */
 
 async function fetchWomenProducts() {
 
@@ -1398,9 +1401,8 @@ async function fetchWomenProducts() {
 
 
         /*
-         * IMPORTANT:
          * Backend unavailable hone par
-         * fake products show nahi honge.
+         * fake/mock products show nahi karenge.
          */
 
         allProducts = [];
@@ -1415,7 +1417,7 @@ async function fetchWomenProducts() {
 
 /* =====================================================
    3. MATERIAL FILTER
-====================================================== */
+===================================================== */
 
 function filterMaterial(materialType) {
 
@@ -1451,35 +1453,35 @@ function filterMaterial(materialType) {
      * UPDATE ACTIVE FILTER LABEL
      */
 
-    const label =
+    const activeFilterLabel =
         document.getElementById(
             'activeFilterLabel'
         );
 
 
-    if (label) {
+    if (activeFilterLabel) {
 
         const labels = {
 
             ALL:
                 'ALL WOMEN WATCHES',
 
-            'STAINLESS STEEL':
+            'Stainless Steel':
                 'STAINLESS STEEL WATCHES',
 
-            'LEATHER STRAP':
+            'Leather Strap':
                 'LEATHER STRAP WATCHES',
 
-            'SILICONE / RUBBER':
+            'Silicone / Rubber':
                 'SILICONE / RUBBER WATCHES',
 
-            'CHAIN / MESH':
+            'Chain / Mesh':
                 'CHAIN / MESH WATCHES'
 
         };
 
 
-        label.innerText =
+        activeFilterLabel.innerText =
             labels[materialType] ||
             materialType + ' WATCHES';
 
@@ -1494,7 +1496,7 @@ function filterMaterial(materialType) {
 
 /* =====================================================
    4. APPLY FILTERS
-====================================================== */
+===================================================== */
 
 function applyFilters() {
 
@@ -1506,8 +1508,7 @@ function applyFilters() {
      * MATERIAL FILTER
      *
      * IMPORTANT:
-     * Dashboard mein material exact values ke
-     * saath save hota hai.
+     * Database se exact material read hoga.
      */
 
     if (currentMaterial !== 'ALL') {
@@ -1515,18 +1516,18 @@ function applyFilters() {
         filtered =
             filtered.filter(product => {
 
-                const material =
+                const productMaterial =
                     String(
                         product.material || ''
                     )
                     .trim()
-                    .toUpperCase();
+                    .toLowerCase();
 
 
-                return material ===
+                return productMaterial ===
                     currentMaterial
                     .trim()
-                    .toUpperCase();
+                    .toLowerCase();
 
             });
 
@@ -1610,7 +1611,10 @@ function applyFilters() {
                 product => {
 
                     const price =
-                        Number(product.price || 0);
+                        Number(
+                            product.price || 0
+                        );
+
 
                     return (
                         price >= 3000 &&
@@ -1652,7 +1656,7 @@ function applyFilters() {
 
 /* =====================================================
    5. RENDER PRODUCTS
-====================================================== */
+===================================================== */
 
 function renderProducts(products) {
 
@@ -1687,7 +1691,7 @@ function renderProducts(products) {
                 <i class="fa-solid fa-box-open"></i>
 
                 <p class="empty-title">
-                    Is category mein koi watch maujood nahi ha.
+                    Is category mein koi watch maujood nahi hai.
                 </p>
 
                 <p class="empty-subtitle">
@@ -1728,7 +1732,7 @@ function renderProducts(products) {
 
 
             /*
-             * PRICE
+             * PRODUCT PRICE
              */
 
             const price =
@@ -1740,18 +1744,14 @@ function renderProducts(products) {
 
 
             /*
-             * MATERIAL
+             * PRODUCT MATERIAL
              */
 
             const material =
                 product.material ||
-                'Watch';
+                'Women Watch';
 
 
-
-            /*
-             * PRODUCT CARD
-             */
 
             return `
 
@@ -1856,7 +1856,7 @@ function renderProducts(products) {
 
 /* =====================================================
    6. PRODUCT DETAIL PAGE
-====================================================== */
+===================================================== */
 
 function goToDetail(productId) {
 
@@ -1869,7 +1869,7 @@ function goToDetail(productId) {
 
 /* =====================================================
    7. INITIAL LOAD
-====================================================== */
+===================================================== */
 
 document.addEventListener(
     'DOMContentLoaded',
@@ -1881,6 +1881,8 @@ document.addEventListener(
 );
 
 </script>
+
+
 
 
 </body>
