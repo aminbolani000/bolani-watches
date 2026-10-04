@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1445,524 +1445,545 @@
 
 
 
-    <!-- ======================================================
-         JAVASCRIPT
-    ======================================================= -->
+    ```html
+<script>
 
-    <script>
+/* ==================================================
+   COUPLE PRODUCTS
+   DATABASE FIELD:
+   category = "couple"
+   material = "Luxury" / "Casual" / "Gift Sets"
+================================================== */
 
 
-        /* ==================================================
-           GLOBAL VARIABLES
-        =================================================== */
+/* ==================================================
+   1. GLOBAL VARIABLES
+================================================== */
 
-        let allProducts = [];
+let allProducts = [];
 
-        let currentCoupleType = 'ALL';
+let currentCoupleType = 'ALL';
 
 
 
-        /* ==================================================
-           1. FETCH COUPLE PRODUCTS
-        =================================================== */
+/* ==================================================
+   2. FETCH COUPLE PRODUCTS FROM BACKEND
+================================================== */
 
-        async function fetchCoupleProducts() {
+async function fetchCoupleProducts() {
 
-            try {
+    try {
 
-
-                const response = await fetch(
-                    'https://watches-backend-cyan.vercel.app/api/products?category=couple'
-                );
-
-
-                if (!response.ok) {
-
-                    throw new Error('API error');
-
-                }
-
-
-                allProducts = await response.json();
-
-
-                applyFilters();
-
-
-            } catch (error) {
-
-
-                console.log(
-                    'Using local fallback mock data for testing:',
-                    error
-                );
-
-
-                /*
-                 * FALLBACK DATA
-                 */
-
-                allProducts = [
-
-                    {
-                        _id: "c1",
-
-                        title: "Royal Gold Edition Pair",
-
-                        coupleType: "PREMIUM",
-
-                        price: 14500,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"
-                        ]
-                    },
-
-
-                    {
-                        _id: "c2",
-
-                        title: "Classic Leather Duo Set",
-
-                        coupleType: "CASUAL",
-
-                        price: 4800,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"
-                        ]
-                    },
-
-
-                    {
-                        _id: "c3",
-
-                        title: "Wedding Special Luxury Box",
-
-                        coupleType: "GIFT",
-
-                        price: 18500,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
-                        ]
-                    },
-
-
-                    {
-                        _id: "c4",
-
-                        title: "Minimal Silver Mesh Pair",
-
-                        coupleType: "CASUAL",
-
-                        price: 6200,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"
-                        ]
-                    },
-
-
-                    {
-                        _id: "c5",
-
-                        title: "Imperium Diamond Dial Couple",
-
-                        coupleType: "PREMIUM",
-
-                        price: 22000,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
-                        ]
-                    },
-
-
-                    {
-                        _id: "c6",
-
-                        title: "Anniversary Celebration Box",
-
-                        coupleType: "GIFT",
-
-                        price: 11500,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"
-                        ]
-                    }
-
-                ];
-
-
-                applyFilters();
-
-            }
-
-        }
-
-
-
-        /* ==================================================
-           2. COUPLE TYPE FILTER
-        =================================================== */
-
-        function filterCoupleType(type) {
-
-
-            currentCoupleType = type;
-
-
-
-            /*
-             * UPDATE ACTIVE CATEGORY
-             */
-
-            document
-                .querySelectorAll('.category-btn')
-                .forEach(btn => {
-
-
-                    if (
-                        btn.getAttribute('data-couple') === type
-                    ) {
-
-
-                        btn.classList.add('active');
-
-
-                    } else {
-
-
-                        btn.classList.remove('active');
-
-                    }
-
-                });
-
-
-
-            /*
-             * FILTER LABELS
-             */
-
-            const labels = {
-
-                ALL: 'ALL COUPLES',
-
-                PREMIUM: '👑 PREMIUM COUPLE',
-
-                CASUAL: '❤️ CASUAL COUPLE',
-
-                GIFT: '🎁 GIFT SETS'
-
-            };
-
-
-
-            document
-                .getElementById('activeFilterLabel')
-                .innerText = labels[type] || type;
-
-
-
-            applyFilters();
-
-        }
-
-
-
-        /* ==================================================
-           3. COMBINED FILTER
-        =================================================== */
-
-        function applyFilters() {
-
-
-            let filtered = [...allProducts];
-
-
-
-            /*
-             * COUPLE TYPE FILTER
-             */
-
-            if (currentCoupleType !== 'ALL') {
-
-
-                filtered = filtered.filter(product => {
-
-
-                    return (
-                        product.coupleType &&
-                        product.coupleType.toUpperCase() ===
-                        currentCoupleType
-                    );
-
-                });
-
-            }
-
-
-
-            /*
-             * PRICE FILTER
-             */
-
-            const priceVal =
-                document.getElementById('priceSort').value;
-
-
-
-            if (priceVal === 'LOW_HIGH') {
-
-
-                filtered.sort(
-                    (a, b) => a.price - b.price
-                );
-
-
-            }
-
-
-            else if (priceVal === 'HIGH_LOW') {
-
-
-                filtered.sort(
-                    (a, b) => b.price - a.price
-                );
-
-
-            }
-
-
-            else if (priceVal === 'UNDER_5000') {
-
-
-                filtered =
-                    filtered.filter(
-                        product => product.price <= 5000
-                    );
-
-
-            }
-
-
-            else if (priceVal === '5000_12000') {
-
-
-                filtered =
-                    filtered.filter(
-                        product =>
-                            product.price >= 5000 &&
-                            product.price <= 12000
-                    );
-
-
-            }
-
-
-            else if (priceVal === 'ABOVE_12000') {
-
-
-                filtered =
-                    filtered.filter(
-                        product => product.price > 12000
-                    );
-
-            }
-
-
-
-            renderProducts(filtered);
-
-        }
-
-
-
-        /* ==================================================
-           4. RENDER PRODUCTS
-        =================================================== */
-
-        function renderProducts(products) {
-
-
-            const grid =
-                document.getElementById('productsGrid');
-
-
-
-            /*
-             * EMPTY STATE
-             */
-
-            if (products.length === 0) {
-
-
-                grid.innerHTML = `
-
-                    <div class="empty-state">
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                        <p class="empty-state-title">
-                            Is category mein koi couple watch nahi mili.
-                        </p>
-
-                        <p class="empty-state-text">
-                            Dusri category ya price filter check karein.
-                        </p>
-
-                    </div>
-
-                `;
-
-
-                return;
-
-            }
-
-
-
-            /*
-             * PRODUCT CARDS
-             */
-
-            grid.innerHTML = products.map(product => {
-
-
-                const image =
-                    product.images &&
-                    product.images.length > 0
-                        ? product.images[0]
-                        : 'images/placeholder.jpg';
-
-
-
-                const price =
-                    Number(product.price || 0)
-                    .toLocaleString();
-
-
-
-                const coupleType =
-                    product.coupleType || 'COUPLE';
-
-
-
-                return `
-
-                    <div
-                        onclick="goToDetail('${product._id}')"
-                        class="product-card"
-                    >
-
-
-                        <!-- IMAGE -->
-
-                        <div class="product-image-container">
-
-
-                            <img
-                                src="${image}"
-                                alt="${product.title}"
-                                class="product-image"
-                            >
-
-
-                            <span class="product-badge">
-                                ${coupleType}
-                            </span>
-
-
-                        </div>
-
-
-
-                        <!-- BODY -->
-
-                        <div class="product-body">
-
-
-                            <div>
-
-                                <h3 class="product-title">
-                                    ${product.title}
-                                </h3>
-
-
-                                <p class="product-description">
-                                    Couple Matching Pair
-                                </p>
-
-                            </div>
-
-
-
-                            <div class="product-bottom">
-
-
-                                <span class="product-price">
-                                    Rs. ${price}
-                                </span>
-
-
-                                <button
-                                    type="button"
-                                    class="details-btn"
-                                >
-
-                                    <span>
-                                        Details
-                                    </span>
-
-                                    <i class="fa-solid fa-chevron-right"></i>
-
-                                </button>
-
-
-                            </div>
-
-
-                        </div>
-
-
-                    </div>
-
-                `;
-
-            }).join('');
-
-        }
-
-
-
-        /* ==================================================
-           5. PRODUCT DETAIL PAGE
-        =================================================== */
-
-        function goToDetail(productId) {
-
-
-            window.location.href =
-                `product-detail.html?id=${productId}`;
-
-        }
-
-
-
-        /* ==================================================
-           6. INITIAL LOAD
-        =================================================== */
-
-        document.addEventListener(
-            'DOMContentLoaded',
-            fetchCoupleProducts
+        const response = await fetch(
+            'https://watches-backend-cyan.vercel.app/api/products?category=couple'
         );
 
 
-    </script>
+        if (!response.ok) {
+
+            throw new Error('API error');
+
+        }
+
+
+        allProducts = await response.json();
+
+
+        console.log(
+            'Couple products loaded:',
+            allProducts
+        );
+
+
+        applyFilters();
+
+
+    } catch (error) {
+
+        console.error(
+            'Couple products fetch error:',
+            error
+        );
+
+
+        /*
+         * IMPORTANT:
+         * No fake products now.
+         *
+         * If backend is unavailable,
+         * simply show empty state.
+         */
+
+        allProducts = [];
+
+        applyFilters();
+
+    }
+
+}
+
+
+
+/* ==================================================
+   3. COUPLE CATEGORY FILTER
+================================================== */
+
+function filterCoupleType(type) {
+
+    currentCoupleType = type;
+
+
+    /*
+     * UPDATE ACTIVE BUTTON
+     */
+
+    document
+        .querySelectorAll('.category-btn')
+        .forEach(btn => {
+
+            if (
+                btn.getAttribute('data-couple') === type
+            ) {
+
+                btn.classList.add('active');
+
+            } else {
+
+                btn.classList.remove('active');
+
+            }
+
+        });
+
+
+
+    /*
+     * UPDATE ACTIVE FILTER TEXT
+     */
+
+    const labels = {
+
+        ALL:
+            'ALL COUPLES',
+
+        LUXURY:
+            '💎 LUXURY COUPLE',
+
+        CASUAL:
+            '✨ CASUAL COUPLE',
+
+        'GIFT SETS':
+            '🎁 GIFT SETS'
+
+    };
+
+
+    const activeFilterLabel =
+        document.getElementById('activeFilterLabel');
+
+
+    if (activeFilterLabel) {
+
+        activeFilterLabel.innerText =
+            labels[type] || type;
+
+    }
+
+
+    applyFilters();
+
+}
+
+
+
+/* ==================================================
+   4. COMBINED FILTER
+================================================== */
+
+function applyFilters() {
+
+    let filtered =
+        [...allProducts];
+
+
+    /*
+     * COUPLE TYPE / MATERIAL FILTER
+     *
+     * Dashboard saves:
+     *
+     * material = Luxury
+     * material = Casual
+     * material = Gift Sets
+     *
+     * So we read product.material
+     */
+
+    if (currentCoupleType !== 'ALL') {
+
+        filtered =
+            filtered.filter(product => {
+
+                const material =
+                    String(
+                        product.material || ''
+                    )
+                    .trim()
+                    .toUpperCase();
+
+
+                return material ===
+                    currentCoupleType
+                    .toUpperCase();
+
+            });
+
+    }
+
+
+
+    /*
+     * PRICE FILTER
+     */
+
+    const priceSort =
+        document.getElementById('priceSort');
+
+
+    const priceVal =
+        priceSort
+            ? priceSort.value
+            : 'DEFAULT';
+
+
+
+    /*
+     * LOW TO HIGH
+     */
+
+    if (priceVal === 'LOW_HIGH') {
+
+        filtered.sort(
+            (a, b) =>
+                Number(a.price || 0) -
+                Number(b.price || 0)
+        );
+
+    }
+
+
+
+    /*
+     * HIGH TO LOW
+     */
+
+    else if (priceVal === 'HIGH_LOW') {
+
+        filtered.sort(
+            (a, b) =>
+                Number(b.price || 0) -
+                Number(a.price || 0)
+        );
+
+    }
+
+
+
+    /*
+     * UNDER 5000
+     */
+
+    else if (priceVal === 'UNDER_5000') {
+
+        filtered =
+            filtered.filter(
+                product =>
+                    Number(product.price || 0) <= 5000
+            );
+
+    }
+
+
+
+    /*
+     * 5000 - 12000
+     */
+
+    else if (priceVal === '5000_12000') {
+
+        filtered =
+            filtered.filter(
+                product => {
+
+                    const price =
+                        Number(product.price || 0);
+
+                    return (
+                        price >= 5000 &&
+                        price <= 12000
+                    );
+
+                }
+            );
+
+    }
+
+
+
+    /*
+     * ABOVE 12000
+     */
+
+    else if (priceVal === 'ABOVE_12000') {
+
+        filtered =
+            filtered.filter(
+                product =>
+                    Number(product.price || 0) > 12000
+            );
+
+    }
+
+
+
+    /*
+     * RENDER
+     */
+
+    renderProducts(filtered);
+
+}
+
+
+
+/* ==================================================
+   5. RENDER PRODUCTS
+================================================== */
+
+function renderProducts(products) {
+
+    const grid =
+        document.getElementById('productsGrid');
+
+
+    if (!grid) {
+
+        console.error(
+            'productsGrid not found in couple.html'
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+     * EMPTY STATE
+     */
+
+    if (products.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <p class="empty-state-title">
+                    Is category mein koi couple watch nahi mili.
+                </p>
+
+                <p class="empty-state-text">
+                    Dusri category ya price filter check karein.
+                </p>
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    /*
+     * PRODUCT CARDS
+     */
+
+    grid.innerHTML =
+        products.map(product => {
+
+
+            /*
+             * PRODUCT IMAGE
+             */
+
+            const image =
+                product.images &&
+                product.images.length > 0
+
+                    ? product.images[0]
+
+                    : 'images/placeholder.jpg';
+
+
+
+            /*
+             * PRICE
+             */
+
+            const price =
+                Number(
+                    product.price || 0
+                )
+                .toLocaleString();
+
+
+
+            /*
+             * COUPLE CATEGORY
+             *
+             * IMPORTANT:
+             * Read material from database.
+             */
+
+            const coupleType =
+                product.material ||
+                'Couple';
+
+
+
+            /*
+             * CARD
+             */
+
+            return `
+
+                <div
+                    onclick="goToDetail('${product._id}')"
+                    class="product-card"
+                >
+
+
+                    <!-- IMAGE -->
+
+                    <div class="product-image-container">
+
+
+                        <img
+                            src="${image}"
+                            alt="${product.title || 'Couple Watch'}"
+                            class="product-image"
+                            loading="lazy"
+                        >
+
+
+                        <span class="product-badge">
+
+                            ${coupleType}
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <!-- BODY -->
+
+                    <div class="product-body">
+
+
+                        <div>
+
+                            <h3 class="product-title">
+
+                                ${product.title || 'Couple Watch'}
+
+                            </h3>
+
+
+                            <p class="product-description">
+
+                                ${product.description || 'Couple Matching Watch Set'}
+
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="product-bottom">
+
+
+                            <span class="product-price">
+
+                                Rs. ${price}
+
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="details-btn"
+                                onclick="event.stopPropagation(); goToDetail('${product._id}')"
+                            >
+
+                                <span>
+                                    Details
+                                </span>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        }).join('');
+
+}
+
+
+
+/* ==================================================
+   6. PRODUCT DETAIL PAGE
+================================================== */
+
+function goToDetail(productId) {
+
+    window.location.href =
+        `product-detail.html?id=${productId}`;
+
+}
+
+
+
+/* ==================================================
+   7. INITIAL LOAD
+================================================== */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        fetchCoupleProducts();
+
+    }
+);
+
+</script>
+
 
 </body>
 </html>
