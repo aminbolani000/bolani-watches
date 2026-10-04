@@ -1334,19 +1334,31 @@
 
 
 
-  ```html
+ ```html
 <script>
 
 /* =====================================================
-   WOMEN PRODUCTS
-   DATABASE:
-   category = "women"
+   WOMEN COLLECTION JAVASCRIPT
+   =====================================================
 
-   MATERIAL VALUES:
+   DATABASE CATEGORY:
+   women
+
+   DATABASE MATERIAL VALUES:
    Stainless Steel
    Leather Strap
    Silicone / Rubber
    Chain / Mesh
+
+   IMPORTANT:
+   UI buttons ke names alag hain:
+   METAL
+   LEATHER
+   SILICONE
+   MESH
+
+   Is script mein UI ko database material se properly
+   connect kiya gaya hai.
 ===================================================== */
 
 
@@ -1361,7 +1373,35 @@ let currentMaterial = 'ALL';
 
 
 /* =====================================================
-   2. FETCH WOMEN PRODUCTS
+   2. MATERIAL MAPPING
+===================================================== */
+
+/*
+   Left side:
+   HTML button ka data-material
+
+   Right side:
+   Database mein actual material
+*/
+
+const materialMap = {
+
+    ALL: 'ALL',
+
+    METAL: 'Stainless Steel',
+
+    LEATHER: 'Leather Strap',
+
+    SILICONE: 'Silicone / Rubber',
+
+    MESH: 'Chain / Mesh'
+
+};
+
+
+
+/* =====================================================
+   3. FETCH WOMEN PRODUCTS
 ===================================================== */
 
 async function fetchWomenProducts() {
@@ -1375,7 +1415,9 @@ async function fetchWomenProducts() {
 
         if (!response.ok) {
 
-            throw new Error('API error');
+            throw new Error(
+                `API Error: ${response.status}`
+            );
 
         }
 
@@ -1389,6 +1431,11 @@ async function fetchWomenProducts() {
         );
 
 
+        /*
+         * Products load hone ke baad
+         * default ALL material show hoga.
+         */
+
         applyFilters();
 
 
@@ -1401,8 +1448,8 @@ async function fetchWomenProducts() {
 
 
         /*
-         * Backend unavailable hone par
-         * fake/mock products show nahi karenge.
+         * Backend error hone par
+         * fake products show nahi karenge.
          */
 
         allProducts = [];
@@ -1416,10 +1463,22 @@ async function fetchWomenProducts() {
 
 
 /* =====================================================
-   3. MATERIAL FILTER
+   4. MATERIAL FILTER
 ===================================================== */
 
 function filterMaterial(materialType) {
+
+    /*
+     * Example:
+
+     * METAL
+     * ↓
+     * Stainless Steel
+
+     * LEATHER
+     * ↓
+     * Leather Strap
+     */
 
     currentMaterial = materialType;
 
@@ -1466,16 +1525,16 @@ function filterMaterial(materialType) {
             ALL:
                 'ALL WOMEN WATCHES',
 
-            'Stainless Steel':
+            METAL:
                 'STAINLESS STEEL WATCHES',
 
-            'Leather Strap':
+            LEATHER:
                 'LEATHER STRAP WATCHES',
 
-            'Silicone / Rubber':
+            SILICONE:
                 'SILICONE / RUBBER WATCHES',
 
-            'Chain / Mesh':
+            MESH:
                 'CHAIN / MESH WATCHES'
 
         };
@@ -1483,10 +1542,14 @@ function filterMaterial(materialType) {
 
         activeFilterLabel.innerText =
             labels[materialType] ||
-            materialType + ' WATCHES';
+            'ALL WOMEN WATCHES';
 
     }
 
+
+    /*
+     * APPLY FILTER
+     */
 
     applyFilters();
 
@@ -1495,26 +1558,55 @@ function filterMaterial(materialType) {
 
 
 /* =====================================================
-   4. APPLY FILTERS
+   5. APPLY FILTERS
 ===================================================== */
 
 function applyFilters() {
 
-    let filtered =
-        [...allProducts];
-
-
     /*
-     * MATERIAL FILTER
-     *
-     * IMPORTANT:
-     * Database se exact material read hoga.
+     * Start with all women products
      */
+
+    let filtered = [
+        ...allProducts
+    ];
+
+
+
+    /* =================================================
+       MATERIAL FILTER
+    ================================================== */
 
     if (currentMaterial !== 'ALL') {
 
+
+        /*
+         * UI material ko database material mein convert
+         */
+
+        const databaseMaterial =
+            materialMap[currentMaterial];
+
+
+        console.log(
+            'Selected UI Material:',
+            currentMaterial
+        );
+
+
+        console.log(
+            'Database Material:',
+            databaseMaterial
+        );
+
+
+        /*
+         * Database material ke against filter
+         */
+
         filtered =
             filtered.filter(product => {
+
 
                 const productMaterial =
                     String(
@@ -1524,10 +1616,18 @@ function applyFilters() {
                     .toLowerCase();
 
 
-                return productMaterial ===
-                    currentMaterial
+                const requiredMaterial =
+                    String(
+                        databaseMaterial || ''
+                    )
                     .trim()
                     .toLowerCase();
+
+
+                return (
+                    productMaterial ===
+                    requiredMaterial
+                );
 
             });
 
@@ -1535,9 +1635,9 @@ function applyFilters() {
 
 
 
-    /*
-     * PRICE FILTER
-     */
+    /* =================================================
+       PRICE FILTER
+    ================================================== */
 
     const priceSort =
         document.getElementById(
@@ -1548,13 +1648,13 @@ function applyFilters() {
     const priceVal =
         priceSort
             ? priceSort.value
-            : 'DEFAULT';
+            : 'ALL';
 
 
 
-    /*
-     * LOW TO HIGH
-     */
+    /* =================================================
+       LOW TO HIGH
+    ================================================== */
 
     if (priceVal === 'LOW_HIGH') {
 
@@ -1568,9 +1668,9 @@ function applyFilters() {
 
 
 
-    /*
-     * HIGH TO LOW
-     */
+    /* =================================================
+       HIGH TO LOW
+    ================================================== */
 
     else if (priceVal === 'HIGH_LOW') {
 
@@ -1584,69 +1684,65 @@ function applyFilters() {
 
 
 
-    /*
-     * UNDER 3000
-     */
+    /* =================================================
+       UNDER 3000
+    ================================================== */
 
     else if (priceVal === 'UNDER_3000') {
 
         filtered =
-            filtered.filter(
-                product =>
-                    Number(product.price || 0) <= 3000
+            filtered.filter(product =>
+                Number(product.price || 0) <= 3000
             );
 
     }
 
 
 
-    /*
-     * 3000 - 7000
-     */
+    /* =================================================
+       3000 - 7000
+    ================================================== */
 
     else if (priceVal === '3000_7000') {
 
         filtered =
-            filtered.filter(
-                product => {
+            filtered.filter(product => {
 
-                    const price =
-                        Number(
-                            product.price || 0
-                        );
-
-
-                    return (
-                        price >= 3000 &&
-                        price <= 7000
+                const price =
+                    Number(
+                        product.price || 0
                     );
 
-                }
-            );
+
+                return (
+                    price >= 3000 &&
+                    price <= 7000
+                );
+
+            });
 
     }
 
 
 
-    /*
-     * ABOVE 7000
-     */
+    /* =================================================
+       ABOVE 7000
+    ================================================== */
 
     else if (priceVal === 'ABOVE_7000') {
 
         filtered =
-            filtered.filter(
-                product =>
-                    Number(product.price || 0) > 7000
+            filtered.filter(product =>
+                Number(product.price || 0) > 7000
             );
 
     }
 
 
 
-    /*
-     * RENDER PRODUCTS
-     */
+    /* =================================================
+       RENDER
+    ================================================== */
 
     renderProducts(filtered);
 
@@ -1655,7 +1751,7 @@ function applyFilters() {
 
 
 /* =====================================================
-   5. RENDER PRODUCTS
+   6. RENDER PRODUCTS
 ===================================================== */
 
 function renderProducts(products) {
@@ -1665,6 +1761,10 @@ function renderProducts(products) {
             'productsGrid'
         );
 
+
+    /*
+     * Safety check
+     */
 
     if (!grid) {
 
@@ -1678,9 +1778,9 @@ function renderProducts(products) {
 
 
 
-    /*
-     * NO PRODUCTS
-     */
+    /* =================================================
+       NO PRODUCTS
+    ================================================== */
 
     if (products.length === 0) {
 
@@ -1702,143 +1802,148 @@ function renderProducts(products) {
 
         `;
 
-
         return;
 
     }
 
 
 
-    /*
-     * PRODUCT CARDS
-     */
+    /* =================================================
+       PRODUCT CARDS
+    ================================================== */
 
-    grid.innerHTML =
-        products.map(product => {
-
-
-            /*
-             * PRODUCT IMAGE
-             */
-
-            const image =
-                product.images &&
-                product.images.length > 0
-
-                    ? product.images[0]
-
-                    : 'images/placeholder.jpg';
+    grid.innerHTML = products.map(product => {
 
 
+        /*
+         * PRODUCT IMAGE
+         */
 
-            /*
-             * PRODUCT PRICE
-             */
+        const image =
+            product.images &&
+            product.images.length > 0
 
-            const price =
-                Number(
-                    product.price || 0
-                )
-                .toLocaleString();
+                ? product.images[0]
+
+                : 'images/placeholder.jpg';
 
 
 
-            /*
-             * PRODUCT MATERIAL
-             */
+        /*
+         * PRODUCT PRICE
+         */
 
-            const material =
-                product.material ||
-                'Women Watch';
-
-
-
-            return `
-
-                <div
-                    onclick="goToDetail('${product._id}')"
-                    class="product-card"
-                >
+        const price =
+            Number(
+                product.price || 0
+            )
+            .toLocaleString();
 
 
-                    <!-- PRODUCT IMAGE -->
 
-                    <div class="product-image-container">
+        /*
+         * PRODUCT MATERIAL
+         */
 
-
-                        <img
-                            src="${image}"
-                            alt="${product.title || 'Women Watch'}"
-                            class="product-image"
-                            loading="lazy"
-                        >
+        const material =
+            product.material ||
+            'Women Watch';
 
 
-                        <!-- MATERIAL BADGE -->
 
-                        <span class="material-badge">
+        /*
+         * PRODUCT DESCRIPTION
+         */
 
-                            ${material}
+        const description =
+            product.description ||
+            'Premium Quality Women Watch';
 
-                        </span>
 
+
+        return `
+
+            <div
+                onclick="goToDetail('${product._id}')"
+                class="product-card"
+            >
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="product-image-container">
+
+
+                    <img
+                        src="${image}"
+                        alt="${product.title || 'Women Watch'}"
+                        class="product-image"
+                        loading="lazy"
+                    >
+
+
+                    <!-- MATERIAL BADGE -->
+
+                    <span class="material-badge">
+
+                        ${material}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- PRODUCT BODY -->
+
+                <div class="product-body">
+
+
+                    <div>
+
+                        <h3 class="product-title">
+
+                            ${product.title || 'Women Watch'}
+
+                        </h3>
+
+
+                        <p class="product-description">
+
+                            ${description}
+
+                        </p>
 
                     </div>
 
 
 
-                    <!-- PRODUCT BODY -->
+                    <!-- PRICE + DETAILS -->
 
-                    <div class="product-body">
-
-
-                        <div>
-
-                            <h3 class="product-title">
-
-                                ${product.title || 'Women Watch'}
-
-                            </h3>
+                    <div class="product-bottom">
 
 
-                            <p class="product-description">
+                        <span class="product-price">
 
-                                ${product.description || 'Premium Quality Women Watch'}
+                            Rs. ${price}
 
-                            </p>
-
-                        </div>
+                        </span>
 
 
+                        <button
+                            type="button"
+                            class="details-button"
+                            onclick="event.stopPropagation(); goToDetail('${product._id}')"
+                        >
 
-                        <!-- PRICE + DETAILS -->
-
-                        <div class="product-bottom">
-
-
-                            <span class="product-price">
-
-                                Rs. ${price}
-
+                            <span>
+                                Details
                             </span>
 
+                            <i class="fa-solid fa-chevron-right"></i>
 
-                            <button
-                                type="button"
-                                class="details-button"
-                                onclick="event.stopPropagation(); goToDetail('${product._id}')"
-                            >
-
-                                <span>
-                                    Details
-                                </span>
-
-                                <i class="fa-solid fa-chevron-right"></i>
-
-                            </button>
-
-
-                        </div>
+                        </button>
 
 
                     </div>
@@ -1846,16 +1951,19 @@ function renderProducts(products) {
 
                 </div>
 
-            `;
 
-        }).join('');
+            </div>
+
+        `;
+
+    }).join('');
 
 }
 
 
 
 /* =====================================================
-   6. PRODUCT DETAIL PAGE
+   7. PRODUCT DETAIL PAGE
 ===================================================== */
 
 function goToDetail(productId) {
@@ -1868,7 +1976,7 @@ function goToDetail(productId) {
 
 
 /* =====================================================
-   7. INITIAL LOAD
+   8. INITIAL LOAD
 ===================================================== */
 
 document.addEventListener(
@@ -1881,6 +1989,7 @@ document.addEventListener(
 );
 
 </script>
+
 
 
 
