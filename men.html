@@ -1,354 +1,1987 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Men's Watch Collection - Bolani Watches</title>
-    
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom Theme Colors & Floating Animations -->
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+
+        /* =====================================================
+           GLOBAL RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #f6f5f2; /* Warm Beige Background */
+            min-height: 100vh;
+            background-color: #f6f5f2;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: #3e4656;
+            display: flex;
+            flex-direction: column;
         }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           CUSTOM CONTAINER
+        ====================================================== */
+
+        .site-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           HEADING FONT
+        ====================================================== */
 
         .font-heading {
             font-family: 'Cinzel', serif;
         }
 
-        /* Continuous Floating Animation for Category PNGs */
+
+        /* =====================================================
+           HEADER / NAVBAR
+        ====================================================== */
+
+        .top-header {
+            width: 100%;
+            background: rgba(246, 245, 242, 0.90);
+            border-bottom: 1px solid rgba(153, 154, 144, 0.20);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: flex;
+            flex-direction: column;
+            color: #1d2b3a;
+        }
+
+        .logo-main {
+            font-family: 'Cinzel', serif;
+            font-size: 30px;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: #1d2b3a;
+            transition: color 0.3s ease;
+        }
+
+        .logo-link:hover .logo-main {
+            color: #8c7a5b;
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        .main-site-link {
+            color: #1d2b3a;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .main-site-link:hover {
+            text-decoration: underline;
+            color: #8c7a5b;
+        }
+
+
+        /* =====================================================
+           SECTION 1
+        ====================================================== */
+
+        .filter-section {
+            width: 100%;
+            padding: 24px 24px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .section-heading h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            line-height: 1.25;
+            font-weight: 700;
+            color: #1d2b3a;
+        }
+
+        .section-heading p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           MATERIAL CATEGORY FILTER
+        ====================================================== */
+
+        .category-scroll {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 8px 0 16px;
+            scrollbar-width: none;
+        }
+
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            flex-shrink: 0;
+            width: 110px;
+            min-height: 112px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(153, 154, 144, 0.30);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            color: #1d2b3a;
+        }
+
+        .category-btn:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            border-color: #1d2b3a;
+            box-shadow:
+                0 0 0 2px #1d2b3a,
+                0 8px 20px rgba(29, 43, 58, 0.12);
+        }
+
+        .category-image {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .category-name {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 8px;
+            color: #1d2b3a;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           FLOATING WATCH ANIMATION
+        ====================================================== */
+
         @keyframes floatEffect {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
         }
 
         .float-img {
             animation: floatEffect 3.5s ease-in-out infinite;
         }
 
-        .float-delay-1 { animation-delay: 0.5s; }
-        .float-delay-2 { animation-delay: 1s; }
-        .float-delay-3 { animation-delay: 1.5s; }
-        .float-delay-4 { animation-delay: 2s; }
+        .float-delay-1 {
+            animation-delay: 0.5s;
+        }
 
-        /* Hide Scrollbar for Horizontal Filter on Mobile */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        .float-delay-2 {
+            animation-delay: 1s;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        .float-delay-3 {
+            animation-delay: 1.5s;
         }
+
+        .float-delay-4 {
+            animation-delay: 2s;
+        }
+
+
+        /* =====================================================
+           SECONDARY FILTER BOX
+        ====================================================== */
+
+        .secondary-filter {
+            margin-top: 16px;
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(153, 154, 144, 0.20);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .active-filter {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2b3a;
+        }
+
+        .active-filter span {
+            color: #8c7a5b;
+            font-weight: 700;
+        }
+
+        .price-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-filter label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #3e4656;
+            white-space: nowrap;
+        }
+
+        .price-filter select {
+            background: #f6f5f2;
+            border: 1px solid rgba(153, 154, 144, 0.30);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1d2b3a;
+            outline: none;
+        }
+
+        .price-filter select:focus {
+            border-color: #1d2b3a;
+            box-shadow: 0 0 0 2px rgba(29, 43, 58, 0.12);
+        }
+
+
+        /* =====================================================
+           PRODUCTS MAIN
+        ====================================================== */
+
+        .products-main {
+            width: 100%;
+            padding: 16px 24px 0;
+            flex: 1;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading-box {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 48px 20px;
+        }
+
+        .loading-box i {
+            font-size: 30px;
+            color: #1d2b3a;
+        }
+
+        .loading-box p {
+            font-size: 14px;
+            margin-top: 8px;
+            color: #6b7280;
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ====================================================== */
+
+        .product-card {
+            cursor: pointer;
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid rgba(153, 154, 144, 0.25);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.13);
+        }
+
+
+        /* =====================================================
+           PRODUCT IMAGE
+        ====================================================== */
+
+        .product-image-box {
+            position: relative;
+            width: 100%;
+            height: 208px;
+            background: #f6f5f2;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.10);
+        }
+
+        .material-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #1d2b3a;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           PRODUCT BODY
+        ====================================================== */
+
+        .product-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 16px;
+            line-height: 1.35;
+            font-weight: 700;
+            color: #1d2b3a;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .product-title {
+            color: #8c7a5b;
+        }
+
+        .product-description {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        .product-bottom {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1d2b3a;
+            white-space: nowrap;
+        }
+
+        .details-btn {
+            background: #1d2b3a;
+            color: #ffffff;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 7px 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .details-btn:hover {
+            background: #8c7a5b;
+        }
+
+
+        /* =====================================================
+           EMPTY PRODUCTS
+        ====================================================== */
+
+        .empty-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 48px 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid rgba(153, 154, 144, 0.20);
+        }
+
+        .empty-products i {
+            font-size: 40px;
+            color: #999a90;
+            margin-bottom: 8px;
+        }
+
+        .empty-products p:first-of-type {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2b3a;
+        }
+
+        .empty-products p:last-of-type {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .site-footer {
+            width: 100%;
+            background: #3e4656;
+            color: #ffffff;
+            text-align: center;
+            padding: 16px;
+            font-size: 14px;
+            margin-top: 32px;
+        }
+
+        .site-footer span {
+            font-weight: 700;
+            color: #f6f5f2;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 767px) {
+
+            .header-inner {
+                padding: 14px 16px;
+            }
+
+            .logo-main {
+                font-size: 23px;
+            }
+
+            .logo-subtitle {
+                font-size: 8px;
+                letter-spacing: 0.16em;
+            }
+
+            .main-site-link {
+                font-size: 11px;
+            }
+
+
+            .filter-section {
+                padding: 20px 12px 0;
+            }
+
+            .section-heading {
+                margin-bottom: 18px;
+            }
+
+            .section-heading h1 {
+                font-size: 25px;
+            }
+
+            .section-heading p {
+                font-size: 11px;
+            }
+
+
+            .category-scroll {
+                justify-content: flex-start;
+                gap: 10px;
+                padding-left: 2px;
+                padding-right: 2px;
+            }
+
+            .category-btn {
+                width: 72px;
+                min-height: 82px;
+                padding: 8px;
+                border-radius: 14px;
+            }
+
+            .category-image {
+                width: 48px;
+                height: 48px;
+            }
+
+            .category-name {
+                font-size: 10px;
+                margin-top: 5px;
+            }
+
+
+            .secondary-filter {
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .active-filter {
+                width: 100%;
+                font-size: 11px;
+            }
+
+            .price-filter {
+                width: 100%;
+            }
+
+            .price-filter label {
+                font-size: 10px;
+            }
+
+            .price-filter select {
+                width: 100%;
+                font-size: 11px;
+                padding: 7px 8px;
+            }
+
+
+            .products-main {
+                padding: 12px 8px 0;
+            }
+
+            /*
+             * IMPORTANT:
+             * Mobile = exactly 3 cards per row
+             */
+            .products-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+
+            .product-card {
+                border-radius: 10px;
+            }
+
+            .product-image-box {
+                height: 112px;
+                padding: 4px;
+            }
+
+            .material-badge {
+                top: 4px;
+                left: 4px;
+                font-size: 7px;
+                padding: 3px 5px;
+            }
+
+            .product-body {
+                padding: 6px;
+            }
+
+            .product-title {
+                font-size: 10px;
+            }
+
+            .product-description {
+                display: none;
+            }
+
+            .product-bottom {
+                margin-top: 6px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+            }
+
+            .product-price {
+                font-size: 11px;
+            }
+
+            .details-btn {
+                width: 100%;
+                font-size: 9px;
+                padding: 5px 3px;
+                border-radius: 5px;
+            }
+
+            .details-btn i {
+                font-size: 7px;
+            }
+
+
+            .site-footer {
+                font-size: 11px;
+                padding: 13px 10px;
+                margin-top: 24px;
+            }
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 360px) {
+
+            .logo-main {
+                font-size: 20px;
+            }
+
+            .main-site-link {
+                font-size: 10px;
+            }
+
+            .category-btn {
+                width: 68px;
+            }
+
+            .products-grid {
+                gap: 6px;
+            }
+
+            .product-image-box {
+                height: 100px;
+            }
+
+            .product-title {
+                font-size: 9px;
+            }
+
+            .product-price {
+                font-size: 10px;
+            }
+
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (min-width: 768px) and (max-width: 1100px) {
+
+            .products-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .product-image-box {
+                height: 180px;
+            }
+
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BAR: Text Logo & Navigation -->
-    <header class="w-full bg-[#f6f5f2] border-b border-[#999a90]/20 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <!-- Text Base Logo (Clicking returns to home page) -->
-            <a href="index.html" class="group flex flex-col">
-                <span class="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-[#1d2b3a] group-hover:text-[#8c7a5b] transition-colors">
+
+<body>
+
+
+    <!-- =====================================================
+         TOP BAR / NAVIGATION
+    ====================================================== -->
+
+    <header class="top-header">
+
+        <div class="header-inner">
+
+            <!-- TEXT LOGO -->
+
+            <a href="index.html" class="logo-link">
+
+                <span class="logo-main">
                     BOLANI WATCHES
                 </span>
-                <span class="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#6b7280]">
+
+                <span class="logo-subtitle">
                     Luxury Timepieces
                 </span>
+
             </a>
 
-            <!-- Quick Counter / Cart Preview -->
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[#1d2b3a] hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-arrow-left"></i> Main Site
+
+            <!-- MAIN SITE -->
+
+            <div>
+
+                <a href="index.html" class="main-site-link">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    <span>
+                        Main Site
+                    </span>
+
                 </a>
+
             </div>
+
         </div>
+
     </header>
 
-    <!-- SECTION 1: VISUAL IMAGE CATEGORY FILTERS & SECONDARY FILTERS -->
-    <section class="w-full py-6 px-3 sm:px-6 max-w-7xl mx-auto">
-        
-        <div class="text-center mb-6">
-            <h1 class="font-heading text-2xl sm:text-4xl font-bold text-[#1d2b3a]">Men's Exclusive Collection</h1>
-            <p class="text-xs sm:text-sm text-[#6b7280] mt-1">Tap watch icons to filter by material type</p>
+
+
+    <!-- =====================================================
+         SECTION 1
+         CATEGORY + PRICE FILTERS
+    ====================================================== -->
+
+    <section class="filter-section site-container">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="section-heading">
+
+            <h1>
+                Men's Exclusive Collection
+            </h1>
+
+            <p>
+                Tap watch icons to filter by material type
+            </p>
+
         </div>
 
-        <!-- 5 Visual Floating PNG Category Filters -->
-        <div class="flex justify-start md:justify-center items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar pb-4 pt-2">
-            
-            <!-- Category 1: ALL MATERIAL -->
-            <button onclick="filterMaterial('ALL')" class="category-btn active flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[72px] sm:w-[110px]" data-material="ALL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101455.png" alt="All Material" class="w-full h-full object-contain float-img">
+
+
+        <!-- =================================================
+             MATERIAL CATEGORY BUTTONS
+        ================================================== -->
+
+        <div class="category-scroll">
+
+
+            <!-- ALL -->
+
+            <button
+                onclick="filterMaterial('ALL')"
+                class="category-btn active"
+                data-material="ALL"
+            >
+
+                <div class="category-image">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG101455.png"
+                        alt="All Material"
+                        class="float-img"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">All Material</span>
+
+                <span class="category-name">
+                    All Material
+                </span>
+
             </button>
 
-            <!-- Category 2: METAL -->
-            <button onclick="filterMaterial('METAL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[72px] sm:w-[110px]" data-material="METAL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG9864.png" alt="Metal Watch" class="w-full h-full object-contain float-img float-delay-1">
+
+
+            <!-- METAL -->
+
+            <button
+                onclick="filterMaterial('METAL')"
+                class="category-btn"
+                data-material="METAL"
+            >
+
+                <div class="category-image">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG9864.png"
+                        alt="Metal Watch"
+                        class="float-img float-delay-1"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">Metal</span>
+
+                <span class="category-name">
+                    Metal
+                </span>
+
             </button>
 
-            <!-- Category 3: LEATHER -->
-            <button onclick="filterMaterial('LEATHER')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[72px] sm:w-[110px]" data-material="LEATHER">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG9859.png" alt="Leather Watch" class="w-full h-full object-contain float-img float-delay-2">
+
+
+            <!-- LEATHER -->
+
+            <button
+                onclick="filterMaterial('LEATHER')"
+                class="category-btn"
+                data-material="LEATHER"
+            >
+
+                <div class="category-image">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG9859.png"
+                        alt="Leather Watch"
+                        class="float-img float-delay-2"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">Leather</span>
+
+                <span class="category-name">
+                    Leather
+                </span>
+
             </button>
 
-            <!-- Category 4: SILICONE -->
-            <button onclick="filterMaterial('SILICONE')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[72px] sm:w-[110px]" data-material="SILICONE">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101438.png" alt="Silicone Watch" class="w-full h-full object-contain float-img float-delay-3">
+
+
+            <!-- SILICONE -->
+
+            <button
+                onclick="filterMaterial('SILICONE')"
+                class="category-btn"
+                data-material="SILICONE"
+            >
+
+                <div class="category-image">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG101438.png"
+                        alt="Silicone Watch"
+                        class="float-img float-delay-3"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">Silicone</span>
+
+                <span class="category-name">
+                    Silicone
+                </span>
+
             </button>
 
-            <!-- Category 5: MESH -->
-            <button onclick="filterMaterial('MESH')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[72px] sm:w-[110px]" data-material="MESH">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101442.png" alt="Mesh Watch" class="w-full h-full object-contain float-img float-delay-4">
+
+
+            <!-- MESH -->
+
+            <button
+                onclick="filterMaterial('MESH')"
+                class="category-btn"
+                data-material="MESH"
+            >
+
+                <div class="category-image">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG101442.png"
+                        alt="Mesh Watch"
+                        class="float-img float-delay-4"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">Mesh</span>
+
+                <span class="category-name">
+                    Mesh
+                </span>
+
             </button>
+
+
         </div>
 
-        <!-- SECONDARY FILTER: Price Sorting & Range Selector -->
-        <div class="mt-4 bg-white p-3 sm:p-4 rounded-xl border border-[#999a90]/20 flex flex-wrap justify-between items-center gap-3">
-            
-            <!-- Type Indicator -->
-            <div class="text-xs sm:text-sm font-semibold text-[#1d2b3a]">
-                Active Filter: <span id="activeFilterLabel" class="text-[#8c7a5b] font-bold">ALL MATERIAL</span>
+
+
+        <!-- =================================================
+             SECONDARY PRICE FILTER
+        ================================================== -->
+
+        <div class="secondary-filter">
+
+
+            <!-- ACTIVE FILTER -->
+
+            <div class="active-filter">
+
+                Active Filter:
+
+                <span id="activeFilterLabel">
+                    ALL MATERIAL
+                </span>
+
             </div>
 
-            <!-- Price Dropdown Filters (Rs. 1,500 - Rs. 15,000) -->
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-                <label for="priceSort" class="text-xs font-bold text-[#3e4656] whitespace-nowrap">Price Filter:</label>
-                <select id="priceSort" onchange="applyFilters()" class="w-full sm:w-auto bg-[#f6f5f2] border border-[#999a90]/30 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
-                    <option value="ALL">All Prices (Rs. 1,500 - 15,000)</option>
-                    <option value="LOW_HIGH">Price: Low to High</option>
-                    <option value="HIGH_LOW">Price: High to Low</option>
-                    <option value="UNDER_3000">Under Rs. 3,000</option>
-                    <option value="3000_7000">Rs. 3,000 - Rs. 7,000</option>
-                    <option value="ABOVE_7000">Above Rs. 7,000</option>
+
+
+            <!-- PRICE FILTER -->
+
+            <div class="price-filter">
+
+                <label for="priceSort">
+                    Price Filter:
+                </label>
+
+                <select
+                    id="priceSort"
+                    onchange="applyFilters()"
+                >
+
+                    <option value="ALL">
+                        All Prices (Rs. 1,500 - 15,000)
+                    </option>
+
+                    <option value="LOW_HIGH">
+                        Price: Low to High
+                    </option>
+
+                    <option value="HIGH_LOW">
+                        Price: High to Low
+                    </option>
+
+                    <option value="UNDER_3000">
+                        Under Rs. 3,000
+                    </option>
+
+                    <option value="3000_7000">
+                        Rs. 3,000 - Rs. 7,000
+                    </option>
+
+                    <option value="ABOVE_7000">
+                        Above Rs. 7,000
+                    </option>
+
                 </select>
+
             </div>
+
         </div>
+
     </section>
 
-    <!-- SECTION 2: PRODUCTS DYNAMIC GRID -->
-    <!-- Mobile: 3 cards horizontal per row | Desktop: 4 cards per row -->
-    <main class="w-full py-4 px-2 sm:px-6 max-w-7xl mx-auto flex-1">
-        
-        <!-- Products Container -->
-        <div id="productsGrid" class="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-5">
-            <!-- Dynamic Cards will be rendered here via Backend API Script -->
-            <div class="col-span-3 md:col-span-4 text-center py-12">
-                <i class="fa-solid fa-spinner fa-spin text-3xl text-[#1d2b3a]"></i>
-                <p class="text-sm mt-2 text-[#6b7280]">Loading Men's Collection...</p>
+
+
+    <!-- =====================================================
+         SECTION 2
+         PRODUCTS
+    ====================================================== -->
+
+    <main class="products-main site-container">
+
+
+        <div id="productsGrid" class="products-grid">
+
+
+            <!-- LOADING -->
+
+            <div class="loading-box">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <p>
+                    Loading Men's Collection...
+                </p>
+
             </div>
+
+
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="w-full bg-[#3e4656] text-white text-center py-4 text-xs sm:text-sm mt-8">
-        <p>Web Created By <span class="font-bold text-[#f6f5f2]">@Amin Bolani</span></p>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <p>
+
+            Web Created By
+
+            <span>
+                @Amin Bolani
+            </span>
+
+        </p>
+
     </footer>
 
-    <!-- JAVASCRIPT: Backend Dynamic Fetch & Frontend Filter Logic -->
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         BACKEND + FILTER + PRODUCT RENDER
+    ====================================================== -->
+
     <script>
-        // Global Variables for Products
+
+
+        /* =====================================================
+           GLOBAL VARIABLES
+        ====================================================== */
+
         let allProducts = [];
+
         let currentMaterial = 'ALL';
 
-        // 1. Fetch Products from Backend Node.js / MongoDB Atlas API
+
+
+        /* =====================================================
+           BACKEND URL
+        ====================================================== */
+
+        const API_BASE_URL =
+            'https://watches-backend-cyan.vercel.app';
+
+
+
+        /* =====================================================
+           FETCH MEN PRODUCTS
+        ====================================================== */
+
         async function fetchMenProducts() {
+
             try {
-                // MongoDB API Endpoint (Replace with actual backend domain if live)
-                const response = await fetch('https://watches-backend-cyan.vercel.app/api/products?category=men');
-                
+
+
+                const response = await fetch(
+                    `${API_BASE_URL}/api/products?category=men`
+                );
+
+
                 if (!response.ok) {
-                    throw new Error('API error');
+
+                    throw new Error(
+                        'API error'
+                    );
+
                 }
-                
-                allProducts = await response.json();
+
+
+                allProducts =
+                    await response.json();
+
+
+                console.log(
+                    'Men Products Loaded:',
+                    allProducts
+                );
+
+
                 applyFilters();
+
 
             } catch (error) {
-                console.log('Using local fallback mock data for testing:', error);
-                
-                // Fallback Mock Data matching Dashboard structure
+
+
+                console.log(
+                    'Backend fetch failed:',
+                    error
+                );
+
+
+                /*
+                 * FALLBACK DATA
+                 *
+                 * Sirf testing ke liye.
+                 */
+
                 allProducts = [
+
                     {
                         _id: "1",
-                        title: "Royal Chronograph Black",
-                        material: "METAL",
-                        price: 4500,
-                        images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"]
+
+                        title:
+                            "Royal Chronograph Black",
+
+                        material:
+                            "Stainless Steel",
+
+                        price:
+                            4500,
+
+                        images: [
+                            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "2",
-                        title: "Classic Vintage Brown",
-                        material: "LEATHER",
-                        price: 2800,
-                        images: ["https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"]
+
+                        title:
+                            "Classic Vintage Brown",
+
+                        material:
+                            "Leather Strap",
+
+                        price:
+                            2800,
+
+                        images: [
+                            "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "3",
-                        title: "Sport Silver Mesh Edition",
-                        material: "MESH",
-                        price: 6200,
-                        images: ["https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"]
+
+                        title:
+                            "Sport Silver Mesh Edition",
+
+                        material:
+                            "Chain / Mesh",
+
+                        price:
+                            6200,
+
+                        images: [
+                            "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "4",
-                        title: "Tactical Matte Silicone",
-                        material: "SILICONE",
-                        price: 1950,
-                        images: ["https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"]
+
+                        title:
+                            "Tactical Matte Silicone",
+
+                        material:
+                            "Silicone / Rubber",
+
+                        price:
+                            1950,
+
+                        images: [
+                            "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "5",
-                        title: "Silver Steel Dual Dial",
-                        material: "METAL",
-                        price: 8500,
-                        images: ["https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"]
+
+                        title:
+                            "Silver Steel Dual Dial",
+
+                        material:
+                            "Stainless Steel",
+
+                        price:
+                            8500,
+
+                        images: [
+                            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "6",
-                        title: "Dark Oak Leather Strap",
-                        material: "LEATHER",
-                        price: 3400,
-                        images: ["https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"]
+
+                        title:
+                            "Dark Oak Leather Strap",
+
+                        material:
+                            "Leather Strap",
+
+                        price:
+                            3400,
+
+                        images: [
+                            "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
+                        ]
                     }
+
                 ];
 
+
                 applyFilters();
+
             }
+
         }
 
-        // 2. Filter by PNG Icon Category Click
+
+
+        /* =====================================================
+           MATERIAL FILTER
+        ====================================================== */
+
         function filterMaterial(materialType) {
-            currentMaterial = materialType;
-            
-            // Update Active UI States
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                if (btn.getAttribute('data-material') === materialType) {
-                    btn.classList.add('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]', 'bg-white');
-                    btn.classList.remove('border-[#999a90]/30');
-                } else {
-                    btn.classList.remove('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
-                    btn.classList.add('border-[#999a90]/30');
-                }
-            });
 
-            document.getElementById('activeFilterLabel').innerText = materialType + " WATCHES";
+
+            currentMaterial =
+                materialType;
+
+
+
+            /*
+             * ACTIVE BUTTON
+             */
+
+            document
+                .querySelectorAll('.category-btn')
+                .forEach(btn => {
+
+
+                    if (
+                        btn.getAttribute(
+                            'data-material'
+                        ) === materialType
+                    ) {
+
+                        btn.classList.add(
+                            'active'
+                        );
+
+                    } else {
+
+                        btn.classList.remove(
+                            'active'
+                        );
+
+                    }
+
+                });
+
+
+
+            /*
+             * UPDATE LABEL
+             */
+
+            document
+                .getElementById(
+                    'activeFilterLabel'
+                )
+                .innerText =
+                materialType === 'ALL'
+                    ? 'ALL MATERIAL'
+                    : materialType + ' WATCHES';
+
+
+
+            /*
+             * APPLY FILTER
+             */
+
             applyFilters();
+
         }
 
-        // 3. Combined Filtering (Material + Price) & Rendering
+
+
+        /* =====================================================
+           MATERIAL MATCH FUNCTION
+        ====================================================== */
+
+        function materialMatches(
+            productMaterial,
+            selectedMaterial
+        ) {
+
+
+            if (
+                !productMaterial ||
+                selectedMaterial === 'ALL'
+            ) {
+
+                return true;
+
+            }
+
+
+            const material =
+                productMaterial
+                    .toString()
+                    .toLowerCase()
+                    .trim();
+
+
+
+            /*
+             * METAL
+             *
+             * Backend:
+             * Stainless Steel
+             */
+
+            if (
+                selectedMaterial === 'METAL'
+            ) {
+
+                return (
+                    material.includes(
+                        'stainless'
+                    ) ||
+                    material.includes(
+                        'steel'
+                    )
+                );
+
+            }
+
+
+
+            /*
+             * LEATHER
+             */
+
+            if (
+                selectedMaterial === 'LEATHER'
+            ) {
+
+                return material.includes(
+                    'leather'
+                );
+
+            }
+
+
+
+            /*
+             * SILICONE
+             */
+
+            if (
+                selectedMaterial === 'SILICONE'
+            ) {
+
+                return (
+                    material.includes(
+                        'silicone'
+                    ) ||
+                    material.includes(
+                        'rubber'
+                    )
+                );
+
+            }
+
+
+
+            /*
+             * MESH
+             */
+
+            if (
+                selectedMaterial === 'MESH'
+            ) {
+
+                return (
+                    material.includes(
+                        'mesh'
+                    ) ||
+                    material.includes(
+                        'chain'
+                    )
+                );
+
+            }
+
+
+            return false;
+
+        }
+
+
+
+        /* =====================================================
+           APPLY ALL FILTERS
+        ====================================================== */
+
         function applyFilters() {
-            let filtered = [...allProducts];
 
-            // Material Filter
-            if (currentMaterial !== 'ALL') {
-                filtered = filtered.filter(p => p.material.toUpperCase() === currentMaterial);
+
+            /*
+             * COPY PRODUCTS
+             */
+
+            let filtered =
+                [...allProducts];
+
+
+
+            /*
+             * MATERIAL
+             */
+
+            if (
+                currentMaterial !== 'ALL'
+            ) {
+
+                filtered =
+                    filtered.filter(
+                        product =>
+                            materialMatches(
+                                product.material,
+                                currentMaterial
+                            )
+                    );
+
             }
 
-            // Price Sorting / Filtering
-            const priceVal = document.getElementById('priceSort').value;
-            if (priceVal === 'LOW_HIGH') {
-                filtered.sort((a, b) => a.price - b.price);
-            } else if (priceVal === 'HIGH_LOW') {
-                filtered.sort((a, b) => b.price - a.price);
-            } else if (priceVal === 'UNDER_3000') {
-                filtered = filtered.filter(p => p.price <= 3000);
-            } else if (priceVal === '3000_7000') {
-                filtered = filtered.filter(p => p.price >= 3000 && p.price <= 7000);
-            } else if (priceVal === 'ABOVE_7000') {
-                filtered = filtered.filter(p => p.price > 7000);
+
+
+            /*
+             * PRICE
+             */
+
+            const priceVal =
+                document.getElementById(
+                    'priceSort'
+                ).value;
+
+
+
+            /*
+             * LOW TO HIGH
+             */
+
+            if (
+                priceVal === 'LOW_HIGH'
+            ) {
+
+                filtered.sort(
+                    (a, b) =>
+                        Number(a.price) -
+                        Number(b.price)
+                );
+
             }
+
+
+
+            /*
+             * HIGH TO LOW
+             */
+
+            else if (
+                priceVal === 'HIGH_LOW'
+            ) {
+
+                filtered.sort(
+                    (a, b) =>
+                        Number(b.price) -
+                        Number(a.price)
+                );
+
+            }
+
+
+
+            /*
+             * UNDER 3000
+             */
+
+            else if (
+                priceVal === 'UNDER_3000'
+            ) {
+
+                filtered =
+                    filtered.filter(
+                        product =>
+                            Number(product.price) <= 3000
+                    );
+
+            }
+
+
+
+            /*
+             * 3000 - 7000
+             */
+
+            else if (
+                priceVal === '3000_7000'
+            ) {
+
+                filtered =
+                    filtered.filter(
+                        product =>
+                            Number(product.price) >= 3000 &&
+                            Number(product.price) <= 7000
+                    );
+
+            }
+
+
+
+            /*
+             * ABOVE 7000
+             */
+
+            else if (
+                priceVal === 'ABOVE_7000'
+            ) {
+
+                filtered =
+                    filtered.filter(
+                        product =>
+                            Number(product.price) > 7000
+                    );
+
+            }
+
+
+
+            /*
+             * RENDER
+             */
 
             renderProducts(filtered);
+
         }
 
-        // 4. Render Grid Cards (Mobile: 3 per row | Desktop: 4 per row)
-        function renderProducts(products) {
-            const grid = document.getElementById('productsGrid');
 
-            if (products.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-3 md:col-span-4 text-center py-12 bg-white rounded-2xl border border-[#999a90]/20">
-                        <i class="fa-solid fa-box-open text-4xl text-[#999a90] mb-2"></i>
-                        <p class="text-sm font-semibold text-[#1d2b3a]">Is category mein koi watch maujood nahi ha.</p>
-                        <p class="text-xs text-[#6b7280]">Dusri category ya price filter check karein.</p>
-                    </div>
-                `;
-                return;
+
+        /* =====================================================
+           ESCAPE HTML
+           Security ke liye
+        ====================================================== */
+
+        function escapeHTML(value) {
+
+            if (value === null || value === undefined) {
+                return '';
             }
 
-            grid.innerHTML = products.map(product => `
-                <div onclick="goToDetail('${product._id}')" class="cursor-pointer group bg-white rounded-xl sm:rounded-2xl border border-[#999a90]/25 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-                    
-                    <!-- Product Image Container -->
-                    <div class="relative w-full h-28 sm:h-52 bg-[#f6f5f2] overflow-hidden flex items-center justify-center p-1 sm:p-3">
-                        <img src="${product.images && product.images.length > 0 ? product.images[0] : 'images/placeholder.jpg'}" 
-                             alt="${product.title}" 
-                             class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                             
-                        <span class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-[#1d2b3a] text-white text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
-                            ${product.material}
-                        </span>
-                    </div>
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
 
-                    <!-- Card Body -->
-                    <div class="p-1.5 sm:p-4 flex flex-col justify-between flex-1">
-                        <div>
-                            <h3 class="text-[10px] sm:text-base font-bold text-[#1d2b3a] line-clamp-1 group-hover:text-[#8c7a5b] transition-colors">
-                                ${product.title}
-                            </h3>
-                            <p class="text-[9px] sm:text-xs text-[#6b7280] hidden sm:block mt-0.5">
-                                Premium Quality Watch
-                            </p>
-                        </div>
-
-                        <div class="mt-1.5 sm:mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                            <span class="text-[11px] sm:text-lg font-bold text-[#1d2b3a]">
-                                Rs. ${product.price.toLocaleString()}
-                            </span>
-                            
-                            <button class="w-full sm:w-auto bg-[#1d2b3a] text-white text-[9px] sm:text-xs font-semibold py-1 px-2 rounded sm:rounded-lg group-hover:bg-[#8c7a5b] transition-colors flex items-center justify-center gap-1">
-                                <span>Details</span>
-                                <i class="fa-solid fa-chevron-right text-[7px] sm:text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
         }
 
-        // 5. Navigate to Details Page
+
+
+        /* =====================================================
+           MATERIAL DISPLAY NAME
+        ====================================================== */
+
+        function getMaterialName(material) {
+
+
+            if (!material) {
+
+                return '';
+
+            }
+
+
+            const value =
+                material.toLowerCase();
+
+
+
+            if (
+                value.includes(
+                    'stainless'
+                ) ||
+                value.includes(
+                    'steel'
+                )
+            ) {
+
+                return 'METAL';
+
+            }
+
+
+            if (
+                value.includes(
+                    'leather'
+                )
+            ) {
+
+                return 'LEATHER';
+
+            }
+
+
+            if (
+                value.includes(
+                    'silicone'
+                ) ||
+                value.includes(
+                    'rubber'
+                )
+            ) {
+
+                return 'SILICONE';
+
+            }
+
+
+            if (
+                value.includes(
+                    'mesh'
+                ) ||
+                value.includes(
+                    'chain'
+                )
+            ) {
+
+                return 'MESH';
+
+            }
+
+
+            return material;
+
+        }
+
+
+
+        /* =====================================================
+           RENDER PRODUCTS
+        ====================================================== */
+
+        function renderProducts(products) {
+
+
+            const grid =
+                document.getElementById(
+                    'productsGrid'
+                );
+
+
+
+            /*
+             * NO PRODUCTS
+             */
+
+            if (
+                products.length === 0
+            ) {
+
+                grid.innerHTML = `
+
+                    <div class="empty-products">
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                        <p>
+                            Is category mein koi watch maujood nahi ha.
+                        </p>
+
+                        <p>
+                            Dusri category ya price filter check karein.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            /*
+             * PRODUCT CARDS
+             */
+
+            grid.innerHTML =
+                products.map(
+                    product => {
+
+
+                        const image =
+                            product.images &&
+                            product.images.length > 0
+                                ? product.images[0]
+                                : 'images/placeholder.jpg';
+
+
+
+                        const material =
+                            getMaterialName(
+                                product.material
+                            );
+
+
+
+                        const title =
+                            escapeHTML(
+                                product.title
+                            );
+
+
+
+                        const safeImage =
+                            escapeHTML(
+                                image
+                            );
+
+
+
+                        const price =
+                            Number(
+                                product.price || 0
+                            ).toLocaleString();
+
+
+
+                        return `
+
+                            <div
+                                onclick="goToDetail('${product._id}')"
+                                class="product-card"
+                            >
+
+
+                                <!-- PRODUCT IMAGE -->
+
+                                <div class="product-image-box">
+
+
+                                    <img
+                                        src="${safeImage}"
+                                        alt="${title}"
+                                        class="product-image"
+                                    >
+
+
+                                    <span
+                                        class="material-badge"
+                                    >
+                                        ${escapeHTML(material)}
+                                    </span>
+
+
+                                </div>
+
+
+
+                                <!-- PRODUCT BODY -->
+
+                                <div class="product-body">
+
+
+                                    <div>
+
+                                        <h3
+                                            class="product-title"
+                                        >
+                                            ${title}
+                                        </h3>
+
+
+                                        <p
+                                            class="product-description"
+                                        >
+                                            Premium Quality Watch
+                                        </p>
+
+                                    </div>
+
+
+
+                                    <div
+                                        class="product-bottom"
+                                    >
+
+
+                                        <span
+                                            class="product-price"
+                                        >
+                                            Rs. ${price}
+                                        </span>
+
+
+
+                                        <button
+                                            type="button"
+                                            class="details-btn"
+                                            onclick="event.stopPropagation(); goToDetail('${product._id}')"
+                                        >
+
+                                            <span>
+                                                Details
+                                            </span>
+
+                                            <i
+                                                class="fa-solid fa-chevron-right"
+                                            ></i>
+
+                                        </button>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join('');
+
+        }
+
+
+
+        /* =====================================================
+           PRODUCT DETAIL PAGE
+        ====================================================== */
+
         function goToDetail(productId) {
-            window.location.href = `product-detail.html?id=${productId}`;
+
+            window.location.href =
+                `product-detail.html?id=${productId}`;
+
         }
 
-        // Initial Load Call
-        document.addEventListener('DOMContentLoaded', fetchMenProducts);
+
+
+        /* =====================================================
+           PAGE LOAD
+        ====================================================== */
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            fetchMenProducts
+        );
+
+
     </script>
+
 </body>
 </html>
+```
