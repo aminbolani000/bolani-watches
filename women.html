@@ -1334,332 +1334,426 @@
 
 
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+   ```html
+<script>
 
-    <script>
-
-        /* =====================================================
-           GLOBAL VARIABLES
-        ====================================================== */
-
-        let allProducts = [];
-
-        let currentMaterial = 'ALL';
+/* =====================================================
+   WOMEN PRODUCTS
+   DATABASE MATERIAL VALUES:
+   Stainless Steel
+   Leather Strap
+   Silicone / Rubber
+   Chain / Mesh
+====================================================== */
 
 
+/* =====================================================
+   1. GLOBAL VARIABLES
+====================================================== */
 
-        /* =====================================================
-           1. FETCH WOMEN PRODUCTS
-        ====================================================== */
+let allProducts = [];
 
-        async function fetchWomenProducts() {
-
-            try {
-
-                const response = await fetch(
-                    'https://watches-backend-cyan.vercel.app/api/products?category=women'
-                );
+let currentMaterial = 'ALL';
 
 
-                if (!response.ok) {
 
-                    throw new Error('API error');
+/* =====================================================
+   2. FETCH WOMEN PRODUCTS
+====================================================== */
 
-                }
+async function fetchWomenProducts() {
 
+    try {
 
-                allProducts = await response.json();
-
-
-                applyFilters();
-
-
-            } catch (error) {
-
-                console.log(
-                    'Using local fallback mock data for testing:',
-                    error
-                );
+        const response = await fetch(
+            'https://watches-backend-cyan.vercel.app/api/products?category=women'
+        );
 
 
-                /* =================================================
-                   FALLBACK DATA
-                ================================================== */
+        if (!response.ok) {
 
-                allProducts = [
+            throw new Error('API error');
 
-                    {
-                        _id: "w1",
-
-                        title: "Rose Gold Crystal Mesh",
-
-                        material: "MESH",
-
-                        price: 5200,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"
-                        ]
-                    },
+        }
 
 
-                    {
-                        _id: "w2",
-
-                        title: "Elegance Pearl White Leather",
-
-                        material: "LEATHER",
-
-                        price: 3200,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"
-                        ]
-                    },
+        allProducts = await response.json();
 
 
-                    {
-                        _id: "w3",
-
-                        title: "Luxury Silver Steel Charm",
-
-                        material: "METAL",
-
-                        price: 7800,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
-                        ]
-                    },
+        console.log(
+            'Women products loaded:',
+            allProducts
+        );
 
 
-                    {
-                        _id: "w4",
-
-                        title: "Pastel Pink Silicone Chic",
-
-                        material: "SILICONE",
-
-                        price: 2100,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"
-                        ]
-                    },
+        applyFilters();
 
 
-                    {
-                        _id: "w5",
+    } catch (error) {
 
-                        title: "Diamond Dial Gold Edition",
-
-                        material: "METAL",
-
-                        price: 9500,
-
-                        images: [
-                            "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"
-                        ]
-                    },
+        console.error(
+            'Women products fetch error:',
+            error
+        );
 
 
-                    {
-                        _id: "w6",
+        /*
+         * IMPORTANT:
+         * Backend unavailable hone par
+         * fake products show nahi honge.
+         */
 
-                        title: "Slim Burgundy Strap Watch",
+        allProducts = [];
 
-                        material: "LEATHER",
+        applyFilters();
 
-                        price: 3900,
+    }
 
-                        images: [
-                            "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
-                        ]
-                    }
-
-                ];
+}
 
 
-                applyFilters();
+
+/* =====================================================
+   3. MATERIAL FILTER
+====================================================== */
+
+function filterMaterial(materialType) {
+
+    currentMaterial = materialType;
+
+
+    /*
+     * UPDATE ACTIVE BUTTON
+     */
+
+    document
+        .querySelectorAll('.category-btn')
+        .forEach(btn => {
+
+            if (
+                btn.getAttribute('data-material') ===
+                materialType
+            ) {
+
+                btn.classList.add('active');
+
+            } else {
+
+                btn.classList.remove('active');
 
             }
 
-        }
+        });
 
 
 
-        /* =====================================================
-           2. MATERIAL FILTER
-        ====================================================== */
+    /*
+     * UPDATE ACTIVE FILTER LABEL
+     */
 
-        function filterMaterial(materialType) {
-
-            currentMaterial = materialType;
-
-
-            /* UPDATE ACTIVE BUTTON */
-
-            document
-                .querySelectorAll('.category-btn')
-                .forEach(btn => {
-
-                    if (
-                        btn.getAttribute('data-material') ===
-                        materialType
-                    ) {
-
-                        btn.classList.add('active');
-
-                    } else {
-
-                        btn.classList.remove('active');
-
-                    }
-
-                });
+    const label =
+        document.getElementById(
+            'activeFilterLabel'
+        );
 
 
-            /* UPDATE LABEL */
+    if (label) {
 
-            document.getElementById(
-                'activeFilterLabel'
-            ).innerText = materialType + " WATCHES";
+        const labels = {
+
+            ALL:
+                'ALL WOMEN WATCHES',
+
+            'STAINLESS STEEL':
+                'STAINLESS STEEL WATCHES',
+
+            'LEATHER STRAP':
+                'LEATHER STRAP WATCHES',
+
+            'SILICONE / RUBBER':
+                'SILICONE / RUBBER WATCHES',
+
+            'CHAIN / MESH':
+                'CHAIN / MESH WATCHES'
+
+        };
 
 
-            applyFilters();
+        label.innerText =
+            labels[materialType] ||
+            materialType + ' WATCHES';
 
-        }
-
-
-
-        /* =====================================================
-           3. APPLY FILTERS
-        ====================================================== */
-
-        function applyFilters() {
-
-            let filtered = [...allProducts];
+    }
 
 
-            /* MATERIAL FILTER */
+    applyFilters();
 
-            if (currentMaterial !== 'ALL') {
+}
 
-                filtered = filtered.filter(product => {
+
+
+/* =====================================================
+   4. APPLY FILTERS
+====================================================== */
+
+function applyFilters() {
+
+    let filtered =
+        [...allProducts];
+
+
+    /*
+     * MATERIAL FILTER
+     *
+     * IMPORTANT:
+     * Dashboard mein material exact values ke
+     * saath save hota hai.
+     */
+
+    if (currentMaterial !== 'ALL') {
+
+        filtered =
+            filtered.filter(product => {
+
+                const material =
+                    String(
+                        product.material || ''
+                    )
+                    .trim()
+                    .toUpperCase();
+
+
+                return material ===
+                    currentMaterial
+                    .trim()
+                    .toUpperCase();
+
+            });
+
+    }
+
+
+
+    /*
+     * PRICE FILTER
+     */
+
+    const priceSort =
+        document.getElementById(
+            'priceSort'
+        );
+
+
+    const priceVal =
+        priceSort
+            ? priceSort.value
+            : 'DEFAULT';
+
+
+
+    /*
+     * LOW TO HIGH
+     */
+
+    if (priceVal === 'LOW_HIGH') {
+
+        filtered.sort(
+            (a, b) =>
+                Number(a.price || 0) -
+                Number(b.price || 0)
+        );
+
+    }
+
+
+
+    /*
+     * HIGH TO LOW
+     */
+
+    else if (priceVal === 'HIGH_LOW') {
+
+        filtered.sort(
+            (a, b) =>
+                Number(b.price || 0) -
+                Number(a.price || 0)
+        );
+
+    }
+
+
+
+    /*
+     * UNDER 3000
+     */
+
+    else if (priceVal === 'UNDER_3000') {
+
+        filtered =
+            filtered.filter(
+                product =>
+                    Number(product.price || 0) <= 3000
+            );
+
+    }
+
+
+
+    /*
+     * 3000 - 7000
+     */
+
+    else if (priceVal === '3000_7000') {
+
+        filtered =
+            filtered.filter(
+                product => {
+
+                    const price =
+                        Number(product.price || 0);
 
                     return (
-                        product.material &&
-                        product.material.toUpperCase() ===
-                        currentMaterial
+                        price >= 3000 &&
+                        price <= 7000
                     );
 
-                });
+                }
+            );
 
-            }
-
-
-            /* PRICE FILTER */
-
-            const priceVal =
-                document.getElementById('priceSort').value;
-
-
-            if (priceVal === 'LOW_HIGH') {
-
-                filtered.sort(
-                    (a, b) => a.price - b.price
-                );
-
-            }
-
-
-            else if (priceVal === 'HIGH_LOW') {
-
-                filtered.sort(
-                    (a, b) => b.price - a.price
-                );
-
-            }
-
-
-            else if (priceVal === 'UNDER_3000') {
-
-                filtered = filtered.filter(
-                    product => product.price <= 3000
-                );
-
-            }
-
-
-            else if (priceVal === '3000_7000') {
-
-                filtered = filtered.filter(
-                    product =>
-                        product.price >= 3000 &&
-                        product.price <= 7000
-                );
-
-            }
-
-
-            else if (priceVal === 'ABOVE_7000') {
-
-                filtered = filtered.filter(
-                    product => product.price > 7000
-                );
-
-            }
-
-
-            renderProducts(filtered);
-
-        }
+    }
 
 
 
-        /* =====================================================
-           4. RENDER PRODUCTS
-        ====================================================== */
+    /*
+     * ABOVE 7000
+     */
 
-        function renderProducts(products) {
+    else if (priceVal === 'ABOVE_7000') {
 
-            const grid =
-                document.getElementById('productsGrid');
+        filtered =
+            filtered.filter(
+                product =>
+                    Number(product.price || 0) > 7000
+            );
 
-
-            /* NO PRODUCTS */
-
-            if (products.length === 0) {
-
-                grid.innerHTML = `
-
-                    <div class="empty-products">
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                        <p class="empty-title">
-                            Is category mein koi watch maujood nahi ha.
-                        </p>
-
-                        <p class="empty-subtitle">
-                            Dusri category ya price filter check karein.
-                        </p>
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
+    }
 
 
 
-            /* PRODUCT CARDS */
+    /*
+     * RENDER PRODUCTS
+     */
 
-            grid.innerHTML = products.map(product => `
+    renderProducts(filtered);
+
+}
+
+
+
+/* =====================================================
+   5. RENDER PRODUCTS
+====================================================== */
+
+function renderProducts(products) {
+
+    const grid =
+        document.getElementById(
+            'productsGrid'
+        );
+
+
+    if (!grid) {
+
+        console.error(
+            'productsGrid not found in women.html'
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+     * NO PRODUCTS
+     */
+
+    if (products.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="empty-products">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <p class="empty-title">
+                    Is category mein koi watch maujood nahi ha.
+                </p>
+
+                <p class="empty-subtitle">
+                    Dusri category ya price filter check karein.
+                </p>
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    /*
+     * PRODUCT CARDS
+     */
+
+    grid.innerHTML =
+        products.map(product => {
+
+
+            /*
+             * PRODUCT IMAGE
+             */
+
+            const image =
+                product.images &&
+                product.images.length > 0
+
+                    ? product.images[0]
+
+                    : 'images/placeholder.jpg';
+
+
+
+            /*
+             * PRICE
+             */
+
+            const price =
+                Number(
+                    product.price || 0
+                )
+                .toLocaleString();
+
+
+
+            /*
+             * MATERIAL
+             */
+
+            const material =
+                product.material ||
+                'Watch';
+
+
+
+            /*
+             * PRODUCT CARD
+             */
+
+            return `
 
                 <div
                     onclick="goToDetail('${product._id}')"
@@ -1671,23 +1765,23 @@
 
                     <div class="product-image-container">
 
+
                         <img
-                            src="${
-                                product.images &&
-                                product.images.length > 0
-                                    ? product.images[0]
-                                    : 'images/placeholder.jpg'
-                            }"
-                            alt="${product.title}"
+                            src="${image}"
+                            alt="${product.title || 'Women Watch'}"
                             class="product-image"
+                            loading="lazy"
                         >
 
 
-                        <!-- MATERIAL -->
+                        <!-- MATERIAL BADGE -->
 
                         <span class="material-badge">
-                            ${product.material}
+
+                            ${material}
+
                         </span>
+
 
                     </div>
 
@@ -1701,12 +1795,16 @@
                         <div>
 
                             <h3 class="product-title">
-                                ${product.title}
+
+                                ${product.title || 'Women Watch'}
+
                             </h3>
 
 
                             <p class="product-description">
-                                Premium Quality Watch
+
+                                ${product.description || 'Premium Quality Women Watch'}
+
                             </p>
 
                         </div>
@@ -1719,11 +1817,14 @@
 
 
                             <span class="product-price">
-                                Rs. ${Number(product.price).toLocaleString()}
+
+                                Rs. ${price}
+
                             </span>
 
 
                             <button
+                                type="button"
                                 class="details-button"
                                 onclick="event.stopPropagation(); goToDetail('${product._id}')"
                             >
@@ -1736,41 +1837,51 @@
 
                             </button>
 
+
                         </div>
+
 
                     </div>
 
+
                 </div>
 
-            `).join('');
+            `;
 
-        }
+        }).join('');
 
-
-
-        /* =====================================================
-           5. PRODUCT DETAIL PAGE
-        ====================================================== */
-
-        function goToDetail(productId) {
-
-            window.location.href =
-                `product-detail.html?id=${productId}`;
-
-        }
+}
 
 
 
-        /* =====================================================
-           INITIAL LOAD
-        ====================================================== */
+/* =====================================================
+   6. PRODUCT DETAIL PAGE
+====================================================== */
 
-        document.addEventListener(
-            'DOMContentLoaded',
-            fetchWomenProducts
-        );
+function goToDetail(productId) {
 
-    </script>
+    window.location.href =
+        `product-detail.html?id=${productId}`;
+
+}
+
+
+
+/* =====================================================
+   7. INITIAL LOAD
+====================================================== */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        fetchWomenProducts();
+
+    }
+);
+
+</script>
+
 
 </body>
 </html>
