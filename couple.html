@@ -1,352 +1,1969 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Couple Watches Collection - Bolani Watches</title>
-    
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom Theme Colors & Floating Animations -->
+
+    <!-- ======================================================
+         FONT AWESOME
+    ======================================================= -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- ======================================================
+         GOOGLE FONTS
+    ======================================================= -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+
+        /* ==================================================
+           GLOBAL RESET
+        ================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
         body {
-            background-color: #f6f5f2; /* Warm Beige Background */
+            min-height: 100vh;
+            background-color: #f6f5f2;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: #3e4656;
+
+            display: flex;
+            flex-direction: column;
         }
+
+
+        button,
+        select {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        img {
+            max-width: 100%;
+        }
+
+
+        /* ==================================================
+           HEADING FONT
+        ================================================== */
 
         .font-heading {
             font-family: 'Cinzel', serif;
         }
 
-        /* Continuous Floating Animation for Category PNGs */
+
+        /* ==================================================
+           FLOATING WATCH ANIMATION
+        ================================================== */
+
         @keyframes floatEffect {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
         }
+
 
         .float-img {
             animation: floatEffect 3.5s ease-in-out infinite;
         }
 
-        .float-delay-1 { animation-delay: 0.5s; }
-        .float-delay-2 { animation-delay: 1s; }
-        .float-delay-3 { animation-delay: 1.5s; }
 
-        /* Hide Scrollbar for Horizontal Filter on Mobile */
+        .float-delay-1 {
+            animation-delay: 0.5s;
+        }
+
+
+        .float-delay-2 {
+            animation-delay: 1s;
+        }
+
+
+        .float-delay-3 {
+            animation-delay: 1.5s;
+        }
+
+
+        /* ==================================================
+           HORIZONTAL SCROLLBAR HIDDEN
+        ================================================== */
+
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+
+        /* ==================================================
+           TOP HEADER
+        ================================================== */
+
+        .top-header {
+            width: 100%;
+            background: rgba(246, 245, 242, 0.90);
+
+            border-bottom: 1px solid rgba(153, 154, 144, 0.20);
+
+            position: sticky;
+            top: 0;
+            z-index: 50;
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+
+        .header-inner {
+            width: 100%;
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding: 16px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        /* ==================================================
+           LOGO
+        ================================================== */
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+
+            color: #1d2b3a;
+
+            transition: color 0.3s ease;
+        }
+
+
+        .brand:hover {
+            color: #8c7a5b;
+        }
+
+
+        .brand-title {
+            font-family: 'Cinzel', serif;
+
+            font-size: 30px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            line-height: 1.1;
+        }
+
+
+        .brand-subtitle {
+            margin-top: 4px;
+
+            font-size: 10px;
+
+            letter-spacing: 0.20em;
+
+            text-transform: uppercase;
+
+            color: #6b7280;
+        }
+
+
+        /* ==================================================
+           MAIN SITE LINK
+        ================================================== */
+
+        .main-site-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            color: #1d2b3a;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            transition: opacity 0.3s ease;
+        }
+
+
+        .main-site-link:hover {
+            opacity: 0.65;
+        }
+
+
+        /* ==================================================
+           MAIN CONTAINER
+        ================================================== */
+
+        .page-container {
+            width: 100%;
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+
+        /* ==================================================
+           SECTION 1
+        ================================================== */
+
+        .filter-section {
+            width: 100%;
+
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+
+
+        .collection-heading {
+            text-align: center;
+
+            margin-bottom: 24px;
+        }
+
+
+        .collection-heading h1 {
+            font-family: 'Cinzel', serif;
+
+            color: #1d2b3a;
+
+            font-size: 36px;
+            font-weight: 700;
+
+            line-height: 1.25;
+        }
+
+
+        .collection-heading p {
+            margin-top: 6px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* ==================================================
+           CATEGORY FILTER ROW
+        ================================================== */
+
+        .category-row {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 24px;
+
+            overflow-x: auto;
+
+            padding-top: 8px;
+            padding-bottom: 16px;
+        }
+
+
+        /* ==================================================
+           CATEGORY BUTTON
+        ================================================== */
+
+        .category-btn {
+            flex: 0 0 auto;
+
+            width: 130px;
+
+            min-height: 122px;
+
+            padding: 12px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background: #ffffff;
+
+            border: 1px solid rgba(153, 154, 144, 0.30);
+
+            border-radius: 16px;
+
+            box-shadow: 0 2px 8px rgba(29, 43, 58, 0.06);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 20px rgba(29, 43, 58, 0.12);
+        }
+
+
+        .category-btn.active {
+            border-color: #1d2b3a;
+
+            box-shadow:
+                0 0 0 2px #1d2b3a,
+                0 8px 20px rgba(29, 43, 58, 0.10);
+        }
+
+
+        .category-image-box {
+            width: 64px;
+            height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+
+        .category-image-box img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+
+        .category-name {
+            margin-top: 8px;
+
+            color: #1d2b3a;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            text-align: center;
+
+            line-height: 1.25;
+        }
+
+
+        /* ==================================================
+           PRICE FILTER BOX
+        ================================================== */
+
+        .price-filter-box {
+            width: 100%;
+
+            margin-top: 16px;
+
+            padding: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 16px;
+
+            flex-wrap: wrap;
+
+            background: #ffffff;
+
+            border: 1px solid rgba(153, 154, 144, 0.20);
+
+            border-radius: 12px;
+        }
+
+
+        .active-filter {
+            color: #1d2b3a;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .active-filter span {
+            color: #8c7a5b;
+
+            font-weight: 700;
+        }
+
+
+        .price-control {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .price-control label {
+            color: #3e4656;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        #priceSort {
+            min-width: 240px;
+
+            padding: 8px 12px;
+
+            background: #f6f5f2;
+
+            color: #1d2b3a;
+
+            border: 1px solid rgba(153, 154, 144, 0.30);
+
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            outline: none;
+
+            cursor: pointer;
+
+            transition: border-color 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+
+        #priceSort:focus {
+            border-color: #1d2b3a;
+
+            box-shadow:
+                0 0 0 2px rgba(29, 43, 58, 0.10);
+        }
+
+
+        /* ==================================================
+           PRODUCTS SECTION
+        ================================================== */
+
+        .products-section {
+            width: 100%;
+
+            flex: 1;
+
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+
+        /* ==================================================
+           PRODUCTS GRID
+        ================================================== */
+
+        #productsGrid {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            gap: 20px;
+        }
+
+
+        /* ==================================================
+           PRODUCT CARD
+        ================================================== */
+
+        .product-card {
+            width: 100%;
+
+            background: #ffffff;
+
+            border: 1px solid rgba(153, 154, 144, 0.25);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 2px 8px rgba(29, 43, 58, 0.05);
+
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .product-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 30px rgba(29, 43, 58, 0.15);
+        }
+
+
+        /* ==================================================
+           PRODUCT IMAGE
+        ================================================== */
+
+        .product-image-container {
+            position: relative;
+
+            width: 100%;
+            height: 210px;
+
+            background: #f6f5f2;
+
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px;
+        }
+
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            transition:
+                transform 0.5s ease;
+        }
+
+
+        .product-card:hover .product-image {
+            transform: scale(1.10);
+        }
+
+
+        /* ==================================================
+           PRODUCT TYPE BADGE
+        ================================================== */
+
+        .product-badge {
+            position: absolute;
+
+            top: 8px;
+            left: 8px;
+
+            background: #1d2b3a;
+
+            color: #ffffff;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            padding: 4px 7px;
+
+            border-radius: 999px;
+
+            text-transform: uppercase;
+
+            line-height: 1;
+        }
+
+
+        /* ==================================================
+           PRODUCT BODY
+        ================================================== */
+
+        .product-body {
+            padding: 16px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            flex: 1;
+        }
+
+
+        .product-title {
+            color: #1d2b3a;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            line-height: 1.3;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            transition: color 0.3s ease;
+        }
+
+
+        .product-card:hover .product-title {
+            color: #8c7a5b;
+        }
+
+
+        .product-description {
+            margin-top: 3px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        .product-bottom {
+            margin-top: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 8px;
+        }
+
+
+        .product-price {
+            color: #1d2b3a;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .details-btn {
+            border: none;
+
+            background: #1d2b3a;
+
+            color: #ffffff;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            padding: 8px 10px;
+
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 5px;
+
+            transition:
+                background 0.3s ease,
+                transform 0.2s ease;
+        }
+
+
+        .details-btn:hover {
+            background: #8c7a5b;
+        }
+
+
+        .details-btn:active {
+            transform: scale(0.96);
+        }
+
+
+        /* ==================================================
+           LOADING STATE
+        ================================================== */
+
+        .loading-state {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 48px 20px;
+        }
+
+
+        .loading-state i {
+            color: #1d2b3a;
+
+            font-size: 30px;
+        }
+
+
+        .loading-state p {
+            margin-top: 8px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* ==================================================
+           EMPTY STATE
+        ================================================== */
+
+        .empty-state {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 48px 20px;
+
+            background: #ffffff;
+
+            border: 1px solid rgba(153, 154, 144, 0.20);
+
+            border-radius: 16px;
+        }
+
+
+        .empty-state i {
+            color: #999a90;
+
+            font-size: 40px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty-state-title {
+            color: #1d2b3a;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .empty-state-text {
+            margin-top: 4px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        .site-footer {
+            width: 100%;
+
+            margin-top: 32px;
+
+            padding: 16px;
+
+            background: #3e4656;
+
+            color: #ffffff;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        .site-footer strong {
+            color: #f6f5f2;
+        }
+
+
+        /* ==================================================
+           TABLET
+        ================================================== */
+
+        @media (max-width: 900px) {
+
+            #productsGrid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+
+                gap: 12px;
+            }
+
+
+            .product-image-container {
+                height: 170px;
+            }
+
+
+            .category-row {
+                justify-content: flex-start;
+            }
+
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 640px) {
+
+            .page-container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+
+            /* Header */
+
+            .header-inner {
+                padding: 14px 12px;
+            }
+
+
+            .brand-title {
+                font-size: 22px;
+
+                letter-spacing: 0.05em;
+            }
+
+
+            .brand-subtitle {
+                font-size: 8px;
+
+                letter-spacing: 0.14em;
+            }
+
+
+            .main-site-link {
+                font-size: 12px;
+            }
+
+
+            /* Heading */
+
+            .filter-section {
+                padding-top: 20px;
+                padding-bottom: 16px;
+            }
+
+
+            .collection-heading {
+                margin-bottom: 18px;
+            }
+
+
+            .collection-heading h1 {
+                font-size: 24px;
+            }
+
+
+            .collection-heading p {
+                font-size: 11px;
+            }
+
+
+            /* Categories */
+
+            .category-row {
+                justify-content: flex-start;
+
+                gap: 10px;
+
+                padding-bottom: 14px;
+            }
+
+
+            .category-btn {
+                width: 85px;
+
+                min-height: 102px;
+
+                padding: 8px;
+
+                border-radius: 14px;
+            }
+
+
+            .category-image-box {
+                width: 48px;
+                height: 48px;
+            }
+
+
+            .category-name {
+                font-size: 10px;
+
+                margin-top: 6px;
+            }
+
+
+            /* Price Filter */
+
+            .price-filter-box {
+                padding: 12px;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 10px;
+            }
+
+
+            .active-filter {
+                font-size: 12px;
+            }
+
+
+            .price-control {
+                width: 100%;
+
+                display: flex;
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 5px;
+            }
+
+
+            .price-control label {
+                font-size: 11px;
+            }
+
+
+            #priceSort {
+                width: 100%;
+
+                min-width: 0;
+
+                font-size: 12px;
+            }
+
+
+            /* Products */
+
+            .products-section {
+                padding-top: 8px;
+            }
+
+
+            #productsGrid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+
+                gap: 8px;
+            }
+
+
+            .product-card {
+                border-radius: 12px;
+            }
+
+
+            .product-image-container {
+                height: 112px;
+
+                padding: 4px;
+            }
+
+
+            .product-badge {
+                top: 4px;
+                left: 4px;
+
+                font-size: 8px;
+
+                padding: 3px 5px;
+            }
+
+
+            .product-body {
+                padding: 6px;
+            }
+
+
+            .product-title {
+                font-size: 10px;
+            }
+
+
+            .product-description {
+                display: none;
+            }
+
+
+            .product-bottom {
+                margin-top: 6px;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 5px;
+            }
+
+
+            .product-price {
+                font-size: 11px;
+            }
+
+
+            .details-btn {
+                width: 100%;
+
+                padding: 5px 4px;
+
+                font-size: 9px;
+
+                border-radius: 6px;
+            }
+
+
+            .details-btn i {
+                font-size: 7px;
+            }
+
+
+            /* Footer */
+
+            .site-footer {
+                margin-top: 20px;
+
+                padding: 12px;
+
+                font-size: 11px;
+            }
+
+
+            /* Empty state */
+
+            .empty-state {
+                padding: 35px 12px;
+            }
+
+        }
+
+
+        /* ==================================================
+           VERY SMALL MOBILE
+        ================================================== */
+
+        @media (max-width: 380px) {
+
+            .brand-title {
+                font-size: 19px;
+            }
+
+
+            .main-site-link {
+                font-size: 10px;
+            }
+
+
+            .category-btn {
+                width: 78px;
+            }
+
+
+            #productsGrid {
+                gap: 6px;
+            }
+
+
+            .product-image-container {
+                height: 100px;
+            }
+
+
+            .product-title {
+                font-size: 9px;
+            }
+
+
+            .product-price {
+                font-size: 10px;
+            }
+
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BAR: Text Logo & Navigation -->
-    <header class="w-full bg-[#f6f5f2] border-b border-[#999a90]/20 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <!-- Text Base Logo (Clicking returns to home page) -->
-            <a href="index.html" class="group flex flex-col">
-                <span class="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-[#1d2b3a] group-hover:text-[#8c7a5b] transition-colors">
+
+<body>
+
+
+    <!-- ======================================================
+         TOP BAR
+    ======================================================= -->
+
+    <header class="top-header">
+
+        <div class="header-inner">
+
+            <!-- Logo -->
+
+            <a href="index.html" class="brand">
+
+                <span class="brand-title">
                     BOLANI WATCHES
                 </span>
-                <span class="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#6b7280]">
+
+                <span class="brand-subtitle">
                     Luxury Timepieces
                 </span>
+
             </a>
 
-            <!-- Navigation Link -->
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[#1d2b3a] hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-arrow-left"></i> Main Site
+
+            <!-- Main Site -->
+
+            <div>
+
+                <a href="index.html" class="main-site-link">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    <span>Main Site</span>
+
                 </a>
+
             </div>
+
         </div>
+
     </header>
 
-    <!-- SECTION 1: COUPLE CATEGORY FILTERS & SECONDARY FILTERS -->
-    <section class="w-full py-6 px-3 sm:px-6 max-w-7xl mx-auto">
-        
-        <div class="text-center mb-6">
-            <h1 class="font-heading text-2xl sm:text-4xl font-bold text-[#1d2b3a]">💑 Couple Watches Collection</h1>
-            <p class="text-xs sm:text-sm text-[#6b7280] mt-1">Select a category to explore matching couple timepieces</p>
+
+
+    <!-- ======================================================
+         SECTION 1
+    ======================================================= -->
+
+    <section class="filter-section page-container">
+
+
+        <!-- Heading -->
+
+        <div class="collection-heading">
+
+            <h1>
+                💑 Couple Watches Collection
+            </h1>
+
+            <p>
+                Select a category to explore matching couple timepieces
+            </p>
+
         </div>
 
-        <!-- 4 Visual Floating PNG Category Filters for Couples -->
-        <div class="flex justify-start md:justify-center items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar pb-4 pt-2">
-            
-            <!-- Category 1: ALL COUPLES -->
-            <button onclick="filterCoupleType('ALL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#1d2b3a] ring-2 ring-[#1d2b3a] shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="ALL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101455.png" alt="All Couple Watches" class="w-full h-full object-contain float-img">
+
+
+        <!-- ==================================================
+             COUPLE CATEGORY FILTERS
+        =================================================== -->
+
+        <div class="category-row no-scrollbar">
+
+
+            <!-- ALL -->
+
+            <button
+                onclick="filterCoupleType('ALL')"
+                class="category-btn active"
+                data-couple="ALL"
+            >
+
+                <div class="category-image-box">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG101455.png"
+                        alt="All Couple Watches"
+                        class="float-img"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">All Couples</span>
+
+                <span class="category-name">
+                    All Couples
+                </span>
+
             </button>
 
-            <!-- Category 2: 👑 PREMIUM COUPLE -->
-            <button onclick="filterCoupleType('PREMIUM')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="PREMIUM">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG9864.png" alt="Premium Couple Watches" class="w-full h-full object-contain float-img float-delay-1">
+
+
+            <!-- PREMIUM -->
+
+            <button
+                onclick="filterCoupleType('PREMIUM')"
+                class="category-btn"
+                data-couple="PREMIUM"
+            >
+
+                <div class="category-image-box">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG9864.png"
+                        alt="Premium Couple Watches"
+                        class="float-img float-delay-1"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">👑 Premium</span>
+
+                <span class="category-name">
+                    👑 Premium
+                </span>
+
             </button>
 
-            <!-- Category 3: ❤️ CASUAL COUPLE -->
-            <button onclick="filterCoupleType('CASUAL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="CASUAL">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG9859.png" alt="Casual Couple Watches" class="w-full h-full object-contain float-img float-delay-2">
+
+
+            <!-- CASUAL -->
+
+            <button
+                onclick="filterCoupleType('CASUAL')"
+                class="category-btn"
+                data-couple="CASUAL"
+            >
+
+                <div class="category-image-box">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG9859.png"
+                        alt="Casual Couple Watches"
+                        class="float-img float-delay-2"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">❤️ Casual</span>
+
+                <span class="category-name">
+                    ❤️ Casual
+                </span>
+
             </button>
 
-            <!-- Category 4: 🎁 GIFT SETS -->
-            <button onclick="filterCoupleType('GIFT')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="GIFT">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
-                    <img src="https://pngimg.com/uploads/watches/watches_PNG101442.png" alt="Gift Sets" class="w-full h-full object-contain float-img float-delay-3">
+
+
+            <!-- GIFT -->
+
+            <button
+                onclick="filterCoupleType('GIFT')"
+                class="category-btn"
+                data-couple="GIFT"
+            >
+
+                <div class="category-image-box">
+
+                    <img
+                        src="https://pngimg.com/uploads/watches/watches_PNG101442.png"
+                        alt="Gift Sets"
+                        class="float-img float-delay-3"
+                    >
+
                 </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">🎁 Gift Sets</span>
+
+                <span class="category-name">
+                    🎁 Gift Sets
+                </span>
+
             </button>
+
+
         </div>
 
-        <!-- SECONDARY FILTER: Price Sorting & Range Selector -->
-        <div class="mt-4 bg-white p-3 sm:p-4 rounded-xl border border-[#999a90]/20 flex flex-wrap justify-between items-center gap-3">
-            
-            <!-- Type Indicator -->
-            <div class="text-xs sm:text-sm font-semibold text-[#1d2b3a]">
-                Active Filter: <span id="activeFilterLabel" class="text-[#8c7a5b] font-bold">ALL COUPLES</span>
+
+
+        <!-- ==================================================
+             PRICE FILTER
+        =================================================== -->
+
+        <div class="price-filter-box">
+
+
+            <!-- Active Filter -->
+
+            <div class="active-filter">
+
+                Active Filter:
+
+                <span id="activeFilterLabel">
+                    ALL COUPLES
+                </span>
+
             </div>
 
-            <!-- Price Dropdown Filters -->
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-                <label for="priceSort" class="text-xs font-bold text-[#3e4656] whitespace-nowrap">Price Filter:</label>
-                <select id="priceSort" onchange="applyFilters()" class="w-full sm:w-auto bg-[#f6f5f2] border border-[#999a90]/30 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
-                    <option value="ALL">All Prices (Rs. 3,000 - 25,000)</option>
-                    <option value="LOW_HIGH">Price: Low to High</option>
-                    <option value="HIGH_LOW">Price: High to Low</option>
-                    <option value="UNDER_5000">Under Rs. 5,000</option>
-                    <option value="5000_12000">Rs. 5,000 - Rs. 12,000</option>
-                    <option value="ABOVE_12000">Above Rs. 12,000</option>
+
+
+            <!-- Price -->
+
+            <div class="price-control">
+
+                <label for="priceSort">
+                    Price Filter:
+                </label>
+
+
+                <select
+                    id="priceSort"
+                    onchange="applyFilters()"
+                >
+
+                    <option value="ALL">
+                        All Prices (Rs. 3,000 - 25,000)
+                    </option>
+
+                    <option value="LOW_HIGH">
+                        Price: Low to High
+                    </option>
+
+                    <option value="HIGH_LOW">
+                        Price: High to Low
+                    </option>
+
+                    <option value="UNDER_5000">
+                        Under Rs. 5,000
+                    </option>
+
+                    <option value="5000_12000">
+                        Rs. 5,000 - Rs. 12,000
+                    </option>
+
+                    <option value="ABOVE_12000">
+                        Above Rs. 12,000
+                    </option>
+
                 </select>
+
             </div>
+
         </div>
+
     </section>
 
-    <!-- SECTION 2: PRODUCTS DYNAMIC GRID -->
-    <!-- Mobile: 3 cards horizontal per row | Desktop: 4 cards per row -->
-    <main class="w-full py-4 px-2 sm:px-6 max-w-7xl mx-auto flex-1">
-        
-        <!-- Products Container -->
-        <div id="productsGrid" class="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-5">
-            <!-- Dynamic Cards will be rendered here via Backend API Script -->
-            <div class="col-span-3 md:col-span-4 text-center py-12">
-                <i class="fa-solid fa-spinner fa-spin text-3xl text-[#1d2b3a]"></i>
-                <p class="text-sm mt-2 text-[#6b7280]">Loading Couple Collection...</p>
+
+
+    <!-- ======================================================
+         SECTION 2 — PRODUCTS
+    ======================================================= -->
+
+    <main class="products-section page-container">
+
+
+        <div id="productsGrid">
+
+
+            <!-- Loading -->
+
+            <div class="loading-state">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <p>
+                    Loading Couple Collection...
+                </p>
+
             </div>
+
+
         </div>
+
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="w-full bg-[#3e4656] text-white text-center py-4 text-xs sm:text-sm mt-8">
-        <p>Web Created By <span class="font-bold text-[#f6f5f2]">@Amin Bolani</span></p>
+
+
+    <!-- ======================================================
+         FOOTER
+    ======================================================= -->
+
+    <footer class="site-footer">
+
+        <p>
+            Web Created By
+
+            <strong>
+                @Amin Bolani
+            </strong>
+        </p>
+
     </footer>
 
-    <!-- JAVASCRIPT: Backend Dynamic Fetch & Frontend Filter Logic -->
+
+
+    <!-- ======================================================
+         JAVASCRIPT
+    ======================================================= -->
+
     <script>
-        // Global Variables for Couple Products
+
+
+        /* ==================================================
+           GLOBAL VARIABLES
+        =================================================== */
+
         let allProducts = [];
+
         let currentCoupleType = 'ALL';
 
-        // 1. Fetch Products from Backend Node.js / MongoDB Atlas API
+
+
+        /* ==================================================
+           1. FETCH COUPLE PRODUCTS
+        =================================================== */
+
         async function fetchCoupleProducts() {
+
             try {
-                // MongoDB API Endpoint for Couple Category
-                const response = await fetch('https://watches-backend-cyan.vercel.app/api/products?category=couple');
-                
+
+
+                const response = await fetch(
+                    'https://watches-backend-cyan.vercel.app/api/products?category=couple'
+                );
+
+
                 if (!response.ok) {
+
                     throw new Error('API error');
+
                 }
-                
+
+
                 allProducts = await response.json();
+
+
                 applyFilters();
+
 
             } catch (error) {
-                console.log('Using local fallback mock data for testing:', error);
-                
-                // Fallback Mock Data for Couple Collection
+
+
+                console.log(
+                    'Using local fallback mock data for testing:',
+                    error
+                );
+
+
+                /*
+                 * FALLBACK DATA
+                 */
+
                 allProducts = [
+
                     {
                         _id: "c1",
+
                         title: "Royal Gold Edition Pair",
+
                         coupleType: "PREMIUM",
+
                         price: 14500,
-                        images: ["https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"]
+
+                        images: [
+                            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "c2",
+
                         title: "Classic Leather Duo Set",
+
                         coupleType: "CASUAL",
+
                         price: 4800,
-                        images: ["https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"]
+
+                        images: [
+                            "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "c3",
+
                         title: "Wedding Special Luxury Box",
+
                         coupleType: "GIFT",
+
                         price: 18500,
-                        images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"]
+
+                        images: [
+                            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "c4",
+
                         title: "Minimal Silver Mesh Pair",
+
                         coupleType: "CASUAL",
+
                         price: 6200,
-                        images: ["https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"]
+
+                        images: [
+                            "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "c5",
+
                         title: "Imperium Diamond Dial Couple",
+
                         coupleType: "PREMIUM",
+
                         price: 22000,
-                        images: ["https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"]
+
+                        images: [
+                            "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
+                        ]
                     },
+
+
                     {
                         _id: "c6",
+
                         title: "Anniversary Celebration Box",
+
                         coupleType: "GIFT",
+
                         price: 11500,
-                        images: ["https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"]
+
+                        images: [
+                            "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"
+                        ]
                     }
+
                 ];
 
+
                 applyFilters();
+
             }
+
         }
 
-        // 2. Filter by Couple Category Icon Click
+
+
+        /* ==================================================
+           2. COUPLE TYPE FILTER
+        =================================================== */
+
         function filterCoupleType(type) {
+
+
             currentCoupleType = type;
-            
-            // Update Active UI States
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                if (btn.getAttribute('data-couple') === type) {
-                    btn.classList.add('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]', 'bg-white');
-                    btn.classList.remove('border-[#999a90]/30');
-                } else {
-                    btn.classList.remove('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
-                    btn.classList.add('border-[#999a90]/30');
-                }
-            });
+
+
+
+            /*
+             * UPDATE ACTIVE CATEGORY
+             */
+
+            document
+                .querySelectorAll('.category-btn')
+                .forEach(btn => {
+
+
+                    if (
+                        btn.getAttribute('data-couple') === type
+                    ) {
+
+
+                        btn.classList.add('active');
+
+
+                    } else {
+
+
+                        btn.classList.remove('active');
+
+                    }
+
+                });
+
+
+
+            /*
+             * FILTER LABELS
+             */
 
             const labels = {
-                'ALL': 'ALL COUPLES',
-                'PREMIUM': '👑 PREMIUM COUPLE',
-                'CASUAL': '❤️ CASUAL COUPLE',
-                'GIFT': '🎁 GIFT SETS'
+
+                ALL: 'ALL COUPLES',
+
+                PREMIUM: '👑 PREMIUM COUPLE',
+
+                CASUAL: '❤️ CASUAL COUPLE',
+
+                GIFT: '🎁 GIFT SETS'
+
             };
 
-            document.getElementById('activeFilterLabel').innerText = labels[type] || type;
+
+
+            document
+                .getElementById('activeFilterLabel')
+                .innerText = labels[type] || type;
+
+
+
             applyFilters();
+
         }
 
-        // 3. Combined Filtering (Type + Price) & Rendering
+
+
+        /* ==================================================
+           3. COMBINED FILTER
+        =================================================== */
+
         function applyFilters() {
+
+
             let filtered = [...allProducts];
 
-            // Couple Type Filter
+
+
+            /*
+             * COUPLE TYPE FILTER
+             */
+
             if (currentCoupleType !== 'ALL') {
-                filtered = filtered.filter(p => p.coupleType.toUpperCase() === currentCoupleType);
+
+
+                filtered = filtered.filter(product => {
+
+
+                    return (
+                        product.coupleType &&
+                        product.coupleType.toUpperCase() ===
+                        currentCoupleType
+                    );
+
+                });
+
             }
 
-            // Price Sorting / Filtering
-            const priceVal = document.getElementById('priceSort').value;
+
+
+            /*
+             * PRICE FILTER
+             */
+
+            const priceVal =
+                document.getElementById('priceSort').value;
+
+
+
             if (priceVal === 'LOW_HIGH') {
-                filtered.sort((a, b) => a.price - b.price);
-            } else if (priceVal === 'HIGH_LOW') {
-                filtered.sort((a, b) => b.price - a.price);
-            } else if (priceVal === 'UNDER_5000') {
-                filtered = filtered.filter(p => p.price <= 5000);
-            } else if (priceVal === '5000_12000') {
-                filtered = filtered.filter(p => p.price >= 5000 && p.price <= 12000);
-            } else if (priceVal === 'ABOVE_12000') {
-                filtered = filtered.filter(p => p.price > 12000);
+
+
+                filtered.sort(
+                    (a, b) => a.price - b.price
+                );
+
+
             }
+
+
+            else if (priceVal === 'HIGH_LOW') {
+
+
+                filtered.sort(
+                    (a, b) => b.price - a.price
+                );
+
+
+            }
+
+
+            else if (priceVal === 'UNDER_5000') {
+
+
+                filtered =
+                    filtered.filter(
+                        product => product.price <= 5000
+                    );
+
+
+            }
+
+
+            else if (priceVal === '5000_12000') {
+
+
+                filtered =
+                    filtered.filter(
+                        product =>
+                            product.price >= 5000 &&
+                            product.price <= 12000
+                    );
+
+
+            }
+
+
+            else if (priceVal === 'ABOVE_12000') {
+
+
+                filtered =
+                    filtered.filter(
+                        product => product.price > 12000
+                    );
+
+            }
+
+
 
             renderProducts(filtered);
+
         }
 
-        // 4. Render Grid Cards (Mobile: 3 per row | Desktop: 4 per row)
+
+
+        /* ==================================================
+           4. RENDER PRODUCTS
+        =================================================== */
+
         function renderProducts(products) {
-            const grid = document.getElementById('productsGrid');
+
+
+            const grid =
+                document.getElementById('productsGrid');
+
+
+
+            /*
+             * EMPTY STATE
+             */
 
             if (products.length === 0) {
+
+
                 grid.innerHTML = `
-                    <div class="col-span-3 md:col-span-4 text-center py-12 bg-white rounded-2xl border border-[#999a90]/20">
-                        <i class="fa-solid fa-box-open text-4xl text-[#999a90] mb-2"></i>
-                        <p class="text-sm font-semibold text-[#1d2b3a]">Is category mein koi couple watch main milti nahi.</p>
-                        <p class="text-xs text-[#6b7280]">Dusri category ya price filter check karein.</p>
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                        <p class="empty-state-title">
+                            Is category mein koi couple watch nahi mili.
+                        </p>
+
+                        <p class="empty-state-text">
+                            Dusri category ya price filter check karein.
+                        </p>
+
                     </div>
+
                 `;
+
+
                 return;
+
             }
 
-            grid.innerHTML = products.map(product => `
-                <div onclick="goToDetail('${product._id}')" class="cursor-pointer group bg-white rounded-xl sm:rounded-2xl border border-[#999a90]/25 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-                    
-                    <!-- Product Image Container -->
-                    <div class="relative w-full h-28 sm:h-52 bg-[#f6f5f2] overflow-hidden flex items-center justify-center p-1 sm:p-3">
-                        <img src="${product.images && product.images.length > 0 ? product.images[0] : 'images/placeholder.jpg'}" 
-                             alt="${product.title}" 
-                             class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                             
-                        <span class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-[#1d2b3a] text-white text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
-                            ${product.coupleType}
-                        </span>
-                    </div>
 
-                    <!-- Card Body -->
-                    <div class="p-1.5 sm:p-4 flex flex-col justify-between flex-1">
-                        <div>
-                            <h3 class="text-[10px] sm:text-base font-bold text-[#1d2b3a] line-clamp-1 group-hover:text-[#8c7a5b] transition-colors">
-                                ${product.title}
-                            </h3>
-                            <p class="text-[9px] sm:text-xs text-[#6b7280] hidden sm:block mt-0.5">
-                                Couple Matching Pair
-                            </p>
-                        </div>
 
-                        <div class="mt-1.5 sm:mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                            <span class="text-[11px] sm:text-lg font-bold text-[#1d2b3a]">
-                                Rs. ${product.price.toLocaleString()}
+            /*
+             * PRODUCT CARDS
+             */
+
+            grid.innerHTML = products.map(product => {
+
+
+                const image =
+                    product.images &&
+                    product.images.length > 0
+                        ? product.images[0]
+                        : 'images/placeholder.jpg';
+
+
+
+                const price =
+                    Number(product.price || 0)
+                    .toLocaleString();
+
+
+
+                const coupleType =
+                    product.coupleType || 'COUPLE';
+
+
+
+                return `
+
+                    <div
+                        onclick="goToDetail('${product._id}')"
+                        class="product-card"
+                    >
+
+
+                        <!-- IMAGE -->
+
+                        <div class="product-image-container">
+
+
+                            <img
+                                src="${image}"
+                                alt="${product.title}"
+                                class="product-image"
+                            >
+
+
+                            <span class="product-badge">
+                                ${coupleType}
                             </span>
-                            
-                            <button class="w-full sm:w-auto bg-[#1d2b3a] text-white text-[9px] sm:text-xs font-semibold py-1 px-2 rounded sm:rounded-lg group-hover:bg-[#8c7a5b] transition-colors flex items-center justify-center gap-1">
-                                <span>Details</span>
-                                <i class="fa-solid fa-chevron-right text-[7px] sm:text-[10px]"></i>
-                            </button>
+
+
                         </div>
+
+
+
+                        <!-- BODY -->
+
+                        <div class="product-body">
+
+
+                            <div>
+
+                                <h3 class="product-title">
+                                    ${product.title}
+                                </h3>
+
+
+                                <p class="product-description">
+                                    Couple Matching Pair
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="product-bottom">
+
+
+                                <span class="product-price">
+                                    Rs. ${price}
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    class="details-btn"
+                                >
+
+                                    <span>
+                                        Details
+                                    </span>
+
+                                    <i class="fa-solid fa-chevron-right"></i>
+
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
                     </div>
-                </div>
-            `).join('');
+
+                `;
+
+            }).join('');
+
         }
 
-        // 5. Navigate to Details Page
+
+
+        /* ==================================================
+           5. PRODUCT DETAIL PAGE
+        =================================================== */
+
         function goToDetail(productId) {
-            window.location.href = `product-detail.html?id=${productId}`;
+
+
+            window.location.href =
+                `product-detail.html?id=${productId}`;
+
         }
 
-        // Initial Load Call
-        document.addEventListener('DOMContentLoaded', fetchCoupleProducts);
+
+
+        /* ==================================================
+           6. INITIAL LOAD
+        =================================================== */
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            fetchCoupleProducts
+        );
+
+
     </script>
+
 </body>
 </html>
+```
